@@ -1,42 +1,27 @@
+@import './reset.css';
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  --white: #FFFFFF;
+  --black: #4B4B4B;
+  --chinese-silver: #CCCCCC;
+  --bright-gray: #EAEAEA;
+  --cultured: #F8F8F8;
+  --lavender: #E8F0FE;
+  --quartz: #4B4B4B;
+  --bleu-de-france: #3583EB;
+  --celtic-blue: #226BCD;
+  --dark-spring-green: #188038;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  font-family: var(--font-roboto);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
