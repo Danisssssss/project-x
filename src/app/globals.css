@@ -1,27 +1,46 @@
 @import './reset.css';
 
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 :root {
-  --white: #FFFFFF;
-  --black: #4B4B4B;
-  --chinese-silver: #CCCCCC;
-  --bright-gray: #EAEAEA;
-  --cultured: #F8F8F8;
-  --lavender: #E8F0FE;
-  --quartz: #4B4B4B;
-  --bleu-de-france: #3583EB;
-  --celtic-blue: #226BCD;
-  --dark-spring-green: #188038;
+  --color-white: #FFFFFF;
+  --color-black: #4B4B4B;
+  --color-chinese-silver: #CCCCCC;
+  --color-bright-gray: #EAEAEA;
+  --color-cultured: #F8F8F8;
+  --color-lavender: #E8F0FE;
+  --color-quartz: #4B4B4B;
+  --color-bleu-de-france: #3583EB;
+  --color-celtic-blue: #226BCD;
+  --color-dark-spring-green: #188038;
+  
+  --color-anti-flash: #F1F5F9;
+  --color-columbia-blue: #CBD5E1;
+  --color-cadet-grey: #94A3B8;
+  --color-dark-jungle: #0F172A;
+
 }
 
 body {
-  color: var(--black);
-  background: var(--white);
+  color: var(--color-black); 
+  background: var(--color-white);
   font-family: var(--font-roboto);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  padding: 0 50px;
 }
