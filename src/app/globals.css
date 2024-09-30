@@ -8,7 +8,7 @@
 
 :root {
   --color-white: #FFFFFF;
-  --color-black: #4B4B4B;
+  --color-black: #000000;
   --color-chinese-silver: #CCCCCC;
   --color-bright-gray: #EAEAEA;
   --color-cultured: #F8F8F8;
@@ -43,4 +43,14 @@ a {
   display: block;
   width: 100%;
   padding: 0 50px;
+}
+
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr; /* высота header и остальная часть */
+  grid-template-columns: auto 1fr; /* ширина sidebar и остальная часть */
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  height: 100vh; /* Высота контейнера на весь экран */
 }

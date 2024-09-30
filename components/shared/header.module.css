@@ -1,13 +1,16 @@
 .header {
-    position: absolute;
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    position: sticky;
     left: 0;
     top: 0;
-    z-index: 100;
     width: 100%;
-    display: block;
+    height: 70px;
     padding: 10px 0;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-chinese-silver);
+    z-index: 100;
 }
 
 .wrapper {
