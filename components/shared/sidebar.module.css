@@ -9,6 +9,19 @@
     overflow-y: auto;
 }
 
+.sidebar.active {
+    width: 100%;
+    padding-right: 25px;
+}
+
+.sidebar.active .item {
+    padding-right: 25px;
+}
+
+.sidebar.active span {
+    display: none;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
