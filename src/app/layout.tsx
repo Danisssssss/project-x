@@ -12,15 +12,13 @@ export const metadata: Metadata = {
   title: "Project-x",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="ru">
       <body className={roboto.variable}>
-        <div>{children}</div>
+      <div className="page">
+        {children}
+      </div>
       </body>
     </html>
   );

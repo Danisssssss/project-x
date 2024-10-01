@@ -13,10 +13,10 @@ export default function Home() {
   };
 
   return (
-      <div className="page">
+      <>
           <Header toggleSidebar={toggleSidebar} />
           <Sidebar isActive={isSidebarActive} />
           <Home_page />
-      </div>
+      </>
   );
 }
