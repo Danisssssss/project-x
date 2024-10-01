@@ -1,8 +1,8 @@
 .sidebar {
     grid-area: sidebar;
     position: sticky;
-    height: calc(100vh-70px);
     width: 333px;
+    top: 70px;
     background-color: var(--color-white);
     border-right: 1px solid var(--color-chinese-silver);
     padding: 30px 25px 0 0;

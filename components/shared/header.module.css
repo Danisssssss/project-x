@@ -34,7 +34,7 @@
 }
 
 .menu:hover {
-    background-color: var(--color-bright-gray);
+    background-color: var(--color-hover-button);
 }
 
 .logo {
@@ -55,7 +55,7 @@
 }
 
 .plus:hover {
-    background-color: var(--color-bright-gray);
+    background-color: var(--color-hover-button);
 }
 
 .user_logo {

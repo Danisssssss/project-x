@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Header from "../../components/shared/header";
 import Sidebar from "../../components/shared/sidebar";
-import Main_page from "../../components/shared/main_page";
+import Home_page from "../../components/shared/home_page";
 
 export default function Home() {
   const [isSidebarActive, setSidebarActive] = useState(false);
@@ -16,7 +16,7 @@ export default function Home() {
       <div className="page">
           <Header toggleSidebar={toggleSidebar} />
           <Sidebar isActive={isSidebarActive} />
-          <Main_page />
+          <Home_page />
       </div>
   );
 }
