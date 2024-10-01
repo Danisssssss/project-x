@@ -1,20 +1,14 @@
-"use client";
-
 import React from "react";
 import styles from "./header.module.css";
 import Image from "next/image";
 
-const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
-    const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        event.preventDefault();
-    };
-
+const Header = () => {
     return (
         <header className={styles.header}>
             <div className="container">
                 <div className={styles.wrapper}>
                     <div className={styles.nav}>
-                        <a href="#" className={styles.menu} onClick={(e) => { handleClick(e); toggleSidebar(); }}>
+                        <a href="#" className={styles.menu}>
                             <Image src="/assets/images/menu.svg" alt="" width={20} height={14} />
                         </a>
                         <a href="/" className={styles.logo}>
@@ -22,7 +16,7 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
                         </a>
                     </div>
                     <div className={styles.user}>
-                        <a href="#" className={styles.plus} onClick={handleClick}>
+                        <a href="#" className={styles.plus}>
                             <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
                         </a>
                         <div className={styles.user_logo}></div>

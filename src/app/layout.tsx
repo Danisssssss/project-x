@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import Header from "../../components/shared/header";
+import Sidebar from "../../components/shared/sidebar";
 
 const roboto = Roboto({
   subsets: ['cyrillic'],
@@ -16,9 +18,11 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   return (
     <html lang="ru">
       <body className={roboto.variable}>
-      <div className="page">
-        {children}
-      </div>
+        <div className="page">
+          <Header/>
+          <Sidebar/>
+          {children}
+        </div>
       </body>
     </html>
   );

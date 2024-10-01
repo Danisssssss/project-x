@@ -1,32 +1,21 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import styles from "./sidebar.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
-const Sidebar = ({ isActive }: { isActive: boolean }) => {
-    const [activeItem, setActiveItem] = useState<string>("home");
-
-    const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, item: string) => {
-        event.preventDefault();  // предотвращаем переход
-        setActiveItem(item);     // устанавливаем активный элемент
-    };
-
+const Sidebar = () => {
     return (
-        <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
+        <div className={`${styles.sidebar}`}>
             <div className={styles.wrapper}>
-                <a href="#" className={`${styles.item} ${activeItem === "home" ? styles.active : ""}`}
-                    onClick={(e) => handleClick(e, "home")}>
+                <Link href="/" className={`${styles.item}`}>
                     <Image src="/assets/images/home.svg" alt="" width={18} height={19} />
                     <span className={styles.text}>Главная страница</span>
-                </a>
-                <a href="#" className={`${styles.item} ${activeItem === "settings" ? styles.active : ""}`}
-                    onClick={(e) => handleClick(e, "settings")}>
+                </Link>
+                <Link href="/settings" className={`${styles.item}`}>
                     <Image src="/assets/images/settings.svg" alt="" width={18} height={20} />
                     <span className={styles.text}>Настройки</span>
-                </a>
-                <a href="#" className={`${styles.item} ${activeItem === "exit" ? styles.active : ""}`}
-                    onClick={(e) => handleClick(e, "exit")}>
+                </Link>
+                <a href="#" className={`${styles.item}`}>
                     <Image src="/assets/images/exit.svg" alt="" width={18} height={18} />
                     <span className={styles.text}>Выйти</span>
                 </a>
