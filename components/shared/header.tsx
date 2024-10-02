@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./header.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
     return (
@@ -11,9 +12,9 @@ const Header = () => {
                         <a href="#" className={styles.menu}>
                             <Image src="/assets/images/menu.svg" alt="" width={20} height={14} />
                         </a>
-                        <a href="/" className={styles.logo}>
+                        <Link href="/" className={styles.logo}>
                             <Image src="/logo.svg" alt="" width={120} height={30} />
-                        </a>
+                        </Link>
                     </div>
                     <div className={styles.user}>
                         <a href="#" className={styles.plus}>

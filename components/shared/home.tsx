@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./home_page.module.css";
+import styles from "./home.module.css";
 import Course_card from "../ui/course_card";
 
-const Home_page = () => {
+const Home = () => {
     return (
-        <div className={styles.home_page}>
+        <div className={styles.home}>
             <Course_card title="Название курса 1"/>
             <Course_card title="Название курса 2"/>
             <Course_card title="Название курса 3"/>
@@ -20,4 +20,4 @@ const Home_page = () => {
     );
 };
 
-export default Home_page;
+export default Home;

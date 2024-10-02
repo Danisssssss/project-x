@@ -1,10 +1,10 @@
 import React from "react";
-import Home_page from "../../components/shared/home_page";
+import Home from "../../components/shared/home";
 
-export default function Home() {
+export default function Home_page() {
   return (
       <>
-          <Home_page/>
+          <Home/>
       </>
   );
 }
