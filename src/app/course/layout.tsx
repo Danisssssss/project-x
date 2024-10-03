@@ -1,9 +1,9 @@
-import Course from "../../../components/shared/course";
+import Course_header from "../../../components/shared/course_header";
 
-export default function Course_Page({children,}: Readonly<{children: React.ReactNode;}>) {
+export default function CourseLayout({children,}: Readonly<{children: React.ReactNode;}>) {
     return (
         <div>
-         <Course/>
+         <Course_header/>
          {children}
         </div>
     );

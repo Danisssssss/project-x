@@ -8,10 +8,12 @@ const Course_feed = () => {
             <div className={styles.banner}>
                 <div className={styles.title}>Название курса</div>
             </div>
-            <div className={styles.copy}>
-                <div className={styles.code_title}></div>
-                <div className={styles.code}></div>
-                <Image className={styles.btn_copy} src="/assets/images/copy.svg" alt="" width={19} height={19} />
+            <div className={styles.copy_block}>
+                <div className={styles.code_title}>Код курса</div>
+                <div className={styles.code_element}>
+                    <div className={styles.code}>xxxxxx</div>
+                    <Image className={styles.btn_copy} src="/assets/images/copy.svg" alt="" width={19} height={19} />
+                </div>
             </div>
         </div>
     );

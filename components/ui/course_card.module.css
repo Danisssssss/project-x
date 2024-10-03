@@ -11,6 +11,9 @@
 .top {
     height: 90px;
     background-image: linear-gradient(rgba(9, 57, 124, 0.8), rgba(9, 57, 124, 0.8)), url("/assets/images/card_background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--color-white);
     position: relative;
     padding: 0 30px;

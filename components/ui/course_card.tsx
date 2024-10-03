@@ -11,7 +11,7 @@ const Course_card: React.FC<CourseCardProps> = ({title}) => {
     return (
         <div className={styles.course_card}>
             <div className={styles.top}>
-                <Link href="/course" className={styles.title}>{title}</Link>
+                <Link href="/course/feed" className={styles.title}>{title}</Link>
                 <a href="#" className={styles.more}>
                     <Image src="/assets/images/more.svg" alt="" width={4} height={18}/>
                 </a>

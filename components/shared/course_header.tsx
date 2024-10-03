@@ -1,15 +1,15 @@
 import React from "react";
-import styles from "./course.module.css";
+import styles from "./course_header.module.css";
 import Link from "next/link";
 
-const Course = () => {
+const Course_header = () => {
     return (
         <div className={styles.header}>
             <div className={styles.header_item}>
-                <Link href="#">Лента</Link>
+                <Link href="/course/feed">Лента</Link>
             </div>
             <div className={styles.header_item}>
-                <Link href="#">Задания</Link>
+                <Link href="/course/task">Задания</Link>
             </div>
             <div className={styles.header_item}>
                 <Link href="#">Пользователи</Link>
@@ -21,4 +21,4 @@ const Course = () => {
     );
 };
 
-export default Course;
+export default Course_header;
