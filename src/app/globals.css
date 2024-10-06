@@ -85,3 +85,7 @@ a {
   height: 30px;
   background-color: var(--color-chinese-silver);
 }
+
+.main {
+  overflow: auto;
+}
