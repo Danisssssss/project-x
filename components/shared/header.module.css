@@ -31,6 +31,7 @@
     margin-left: -15px;
     transition: background-color .1s linear;
     border-radius: 30px;
+    user-select: none;
 }
 
 .menu:hover {
@@ -39,6 +40,7 @@
 
 .logo {
     margin-left: 15px;
+    user-select: none;
 }
 
 .user {
@@ -52,6 +54,7 @@
     margin-right: -15px;
     transition: background-color .1s linear;
     border-radius: 30px;
+    user-select: none;
 }
 
 .plus:hover {

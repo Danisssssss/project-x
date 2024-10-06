@@ -3,15 +3,15 @@ import styles from "./header.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
     return (
         <header className={styles.header}>
             <div className="container">
                 <div className={styles.wrapper}>
                     <div className={styles.nav}>
-                        <a href="#" className={styles.menu}>
+                        <div className={styles.menu} onClick={toggleSidebar}>
                             <Image src="/assets/images/menu.svg" alt="" width={20} height={14} />
-                        </a>
+                        </div>
                         <Link href="/" className={styles.logo}>
                             <Image src="/logo.svg" alt="" width={120} height={30} />
                         </Link>

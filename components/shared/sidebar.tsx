@@ -5,7 +5,7 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const Sidebar = () => {
+const Sidebar = ({ isActive }: { isActive: boolean }) => {
     const [activeLink, setActiveLink] = useState("/");
   
     const handleClick = (href: string) => {
@@ -13,7 +13,7 @@ const Sidebar = () => {
     };
   
     return (
-        <div className={styles.sidebar}>
+        <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
             <div className={styles.wrapper}>
                 <Link href="/" className={`${styles.item} ${activeLink === "/" ? styles.active : ""}`}
                 onClick={() => handleClick("/")}>
