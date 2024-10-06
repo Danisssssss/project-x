@@ -20,7 +20,7 @@ const Header = () => {
                         <a href="#" className={styles.plus}>
                             <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
                         </a>
-                        <div className={styles.user_logo}></div>
+                        {/* <div className={styles.user_logo}></div> */}
                     </div>
                 </div>
             </div>

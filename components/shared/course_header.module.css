@@ -1,21 +1,22 @@
 .header {
     display: flex;
-    padding: 15px 25px;
+    padding: 0 25px;
     height: fit-content;
     border-bottom: 1px solid var(--color-chinese-silver);
 }
 
 .header_item {
     display: flex;
+    padding: 15px 0;
     position: relative;
     justify-content: center;
     width: 130px;
     font-size: 14px;
 }
 
-.header_item:first-child:after {
+.header_item.active::after {
     position: absolute;
-    bottom: -15px;
+    bottom: 0;
     left: 0;
     content: "";
     display: block;
