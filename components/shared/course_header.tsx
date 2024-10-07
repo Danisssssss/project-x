@@ -32,10 +32,10 @@ const CourseHeader = () => {
                 onClick={() => handleClick("/course/users")}>
                 <p>Пользователи</p>
             </Link>
-            <Link href="/course/grades" className={`${styles.header_item} ${activeLink === "/course/grades" ? styles.active : ""}`}
+            {/* <Link href="/course/grades" className={`${styles.header_item} ${activeLink === "/course/grades" ? styles.active : ""}`}
                 onClick={() => handleClick("/course/grades")}>
                 <p>Оценки</p>
-            </Link>
+            </Link> */}
         </div>
     );
 };
