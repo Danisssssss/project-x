@@ -24,8 +24,8 @@ const CourseHeader = () => {
                 onClick={() => handleClick("/course/feed")}>
                 <p>Лента</p>
             </Link>
-            <Link href="/course/task" className={`${styles.header_item} ${activeLink === "/course/task" ? styles.active : ""}`}
-                onClick={() => handleClick("/course/task")}>
+            <Link href="/course/tasks" className={`${styles.header_item} ${activeLink === "/course/tasks" ? styles.active : ""}`}
+                onClick={() => handleClick("/course/tasks")}>
                 <p>Задания</p>
             </Link>
             <Link href="/course/users" className={`${styles.header_item} ${activeLink === "/course/users" ? styles.active : ""}`}
