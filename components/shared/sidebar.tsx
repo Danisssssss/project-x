@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./sidebar.module.css";
 import Image from "next/image";
@@ -13,9 +13,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
   const { setBreadcrumbs } = useBreadcrumbs();
   const [activeLink, setActiveLink] = useState("/");
 
+  useEffect(() => {
+    // Загружаем активный пункт из localStorage при первом рендере
+    const savedActiveLink = localStorage.getItem("activeLink");
+    if (savedActiveLink) {
+      setActiveLink(savedActiveLink);
+    }
+  }, []);
+
   const handleClick = (href: string, label: string) => {
     setActiveLink(href);
     setBreadcrumbs(label);
+    localStorage.setItem("activeLink", href); // Сохраняем активный пункт
     router.push(href);
   };
 
