@@ -3,6 +3,7 @@
 import React, {useState} from "react";
 import Image from "next/image";
 import styles from "./course_task_item.module.css"
+import Link from "next/link";
 
 const Course_task_item = () => {
     const [isActive, setIsActive] = useState(false);
@@ -48,7 +49,7 @@ const Course_task_item = () => {
         </div>
       </div>
       <div className={styles.item_footer}>
-        <a href="#">Подробнее</a>
+        <Link href="/task/instruction">Подробнее</Link>
       </div>
     </div>
   );
