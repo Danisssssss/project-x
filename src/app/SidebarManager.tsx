@@ -1,4 +1,4 @@
-"use client";  // Клиентский компонент
+"use client";
 
 import React, { useState } from "react";
 import Header from "../../components/shared/header";
@@ -8,14 +8,16 @@ const SidebarManager = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
   const toggleSidebar = () => {
-    setIsSidebarActive(!isSidebarActive); // Меняем состояние боковой панели
+    setIsSidebarActive(!isSidebarActive);
   };
 
   return (
     <div className="page">
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isActive={isSidebarActive} />
-      {children}
+      <div className="content">
+        {children}
+      </div>
     </div>
   );
 };

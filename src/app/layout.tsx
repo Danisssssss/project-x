@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import SidebarManager from './SidebarManager'
+import SidebarManager from './SidebarManager';
+import { BreadcrumbsProvider } from './BreadcrumbsContext';
 
 const roboto = Roboto({
   subsets: ['cyrillic'],
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
   title: "Project-x",
 };
 
-export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
       <body className={roboto.variable}>
-        <SidebarManager>
-          {children}
-        </SidebarManager>
+        <BreadcrumbsProvider>
+          <SidebarManager>{children}</SidebarManager>
+        </BreadcrumbsProvider>
       </body>
     </html>
   );
