@@ -15,6 +15,10 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
                         <Link href="/" className={styles.logo}>
                             <Image src="/logo.svg" alt="" width={120} height={30} />
                         </Link>
+                        <div className={styles.breadcrumbs}>
+                            <Image src="/assets/images/arrow.svg" alt="" width={6} height={12} />
+                            <a href="#">Главная страница</a>
+                        </div>
                     </div>
                     <div className={styles.user}>
                         <a href="#" className={styles.plus}>
