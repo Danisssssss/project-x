@@ -45,6 +45,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
           <Image src="/assets/images/settings.svg" alt="" width={18} height={20} />
           <span className={styles.text}>Настройки</span>
         </div>
+        <a href="#" className={styles.item}>
+          <Image src="/assets/images/exit.svg" alt="" width={18} height={18} />
+          <span className={styles.text}>Выйти</span>
+        </a>
       </div>
     </div>
   );

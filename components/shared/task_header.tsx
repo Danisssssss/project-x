@@ -24,8 +24,8 @@ const TaskHeader = () => {
                 onClick={() => handleClick("/task/instruction")}>
                 <p>Инструкции</p>
             </Link>
-            <Link href="/task/works" className={`${styles.header_item} ${activeLink === "/task/works" ? styles.active : ""}`}
-                onClick={() => handleClick("/task/works")}>
+            <Link href="/task/students_work" className={`${styles.header_item} ${activeLink === "/task/students_work" ? styles.active : ""}`}
+                onClick={() => handleClick("/task/students_work")}>
                 <p>Работы учащихся</p>
             </Link>
         </div>

@@ -1,0 +1,140 @@
+.wrapper {
+    display: flex;
+    height: calc(100% - 50px);
+}
+
+.left {
+    border-right: 1px solid var(--color-chinese-silver);
+}
+
+.passed {
+    margin-top: 50px;
+}
+
+.title {
+    font-size: 15px;
+    color: var(--color-black);
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.students {
+    display: flex;
+    flex-direction: column;
+}
+
+.student {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    border-bottom: 1px solid var(--color-chinese-silver);
+}
+
+.student:first-child {
+    border-top: 1px solid var(--color-chinese-silver);
+    border-bottom: 1px solid var(--color-chinese-silver);
+}
+
+.image {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: var(--color-quartz);
+    margin-right: 20px;
+    margin-left: 25px;
+}
+
+.name {
+    border-right: 1px solid var(--color-chinese-silver);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    margin-right: 25px;
+    font-size: 14px;
+    color: var(--color-quartz);
+    font-weight: 500;
+}
+
+.grade {
+    display: flex;
+    margin-right: 20px;
+}
+
+.count {
+    margin-right: 5px;
+}
+
+.max_grade {
+    margin-left: 5px;
+}
+
+.more {
+    cursor: pointer;
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: background-color .1s linear;
+    border-radius: 30px;
+    width: 47px;
+}
+
+.more:hover {
+    background-color: var(--color-hover-button);
+}
+
+.not_passed {
+    margin-top: 40px;
+}
+
+.input {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.passed .input::placeholder {
+    color: var(--color-dark-spring-green);
+}
+
+.right {
+    padding: 30px;
+}
+
+.task_title {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 20px;
+}
+
+.task_grades {
+    display: flex;
+    align-items: center;
+}
+
+.task_passed {
+    padding: 7px 50px 7px 0;
+    border-right: 1px solid var(--color-chinese-silver);
+}
+
+.task_count {
+    font-size: 40px;
+}
+
+.task_not_passed {
+    margin-left: 15px;
+}
