@@ -27,6 +27,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
               <a href="#">{breadcrumbs}</a>
             </div>
           </div>
+          <div className={styles.user}>
+                <a href="#" className={styles.plus}>
+                    <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
+                </a>
+            </div>
         </div>
       </div>
     </header>
