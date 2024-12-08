@@ -28,11 +28,24 @@
     align-items: center;
     height: 70px;
     border-bottom: 1px solid var(--color-chinese-silver);
+    cursor: pointer;
+}
+
+.student.active {
+    background-color: var(--color-cultured);
 }
 
 .student:first-child {
     border-top: 1px solid var(--color-chinese-silver);
     border-bottom: 1px solid var(--color-chinese-silver);
+}
+
+.student:hover {
+    background-color: var(--color-cultured);
+}
+
+.student:hover .name {
+    text-decoration: underline;
 }
 
 .image {
