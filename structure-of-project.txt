@@ -1,0 +1,27 @@
+/src
+|--/app
+|  |--BreadcrumbsContext.tsx
+|  |--layout.tsx
+|  |--not-found.tsx
+|  |--page.tsx
+|  |--SidebarManager.tsx
+|  |--/api
+|  |--разные api и т.д.
+|  |--/course
+|  |  |--layout.tsx
+|  |  |--page.tsx
+|  |  |--и т.д.
+|  |--/settings
+|  |  |--разные файлы и т.д.
+|  |--/task
+|  |  |--разные файлы и т.д.
+/public
+|--/assets
+|  |--разные файлы и т.д.
+|--.env
+|--.eslintrc.json
+|--next.config.mjs
+|--next-env.d.ts
+|--package.json
+|--package-lock.json
+|--tsconfig.json
