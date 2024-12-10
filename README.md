@@ -31,3 +31,15 @@ npm install
 ```bash
 npm run dev
 ```
+### Стек технологий
+**Frontend**
+- NEXTJS
+- TypeScript
+- CSS
+
+**Prisma**
+
+**Backend**
+- VERCEL
+- Noen
+- PostgreSQL
