@@ -33,12 +33,11 @@ model Role {
 }
 
 model Course {
-    course_id   Int    @id @default(autoincrement())
-    name        String
-    description String
-    teacher_id  Int // Внешний ключ на User
-    Teacher     User   @relation("TeacherCourses", fields: [teacher_id], references: [user_id])
+    course_id  Int    @id @default(autoincrement())
+    teacher_id Int
+    title      String
 
+    Teacher    User   @relation("TeacherCourses", fields: [teacher_id], references: [user_id])
     Assignments Assignment[]
     Enrollments Course_Enrollment[]
 }
@@ -60,26 +59,26 @@ model Assignment {
     max_grade     Int
 
     Course      Course                     @relation(fields: [course_id], references: [course_id])
-    Files       Assignment_File_Mappings[]
+    Files       Assignment_Files_Mappings[]
     Submissions Submission[]
 }
 
-model Assignment_File {
+model Assignment_Files {
     file_id   Int    @id @default(autoincrement())
     file_name String
     file_path String
     file_type String
 
-    Mappings Assignment_File_Mappings[]
+    Mappings Assignment_Files_Mappings[]
 }
 
-model Assignment_File_Mappings {
+model Assignment_Files_Mappings {
     mapping_id    Int @id @default(autoincrement())
     assignment_id Int
     file_id       Int
 
     Assignment Assignment      @relation(fields: [assignment_id], references: [assignment_id])
-    File       Assignment_File @relation(fields: [file_id], references: [file_id])
+    File       Assignment_Files @relation(fields: [file_id], references: [file_id])
 }
 
 model Submission {
@@ -91,23 +90,23 @@ model Submission {
 
     Assignment Assignment                 @relation(fields: [assignment_id], references: [assignment_id])
     Student    User                       @relation(fields: [student_id], references: [user_id])
-    Files      Submission_File_Mappings[]
+    Files      Submission_Files_Mappings[]
 }
 
-model Submission_File {
+model Submission_Files {
     file_id   Int    @id @default(autoincrement())
     file_name String
     file_path String
     file_type String
 
-    Mappings Submission_File_Mappings[]
+    Mappings Submission_Files_Mappings[]
 }
 
-model Submission_File_Mappings {
+model Submission_Files_Mappings {
     mapping_id    Int @id @default(autoincrement())
     submission_id Int
     file_id       Int
 
     Submission Submission      @relation(fields: [submission_id], references: [submission_id])
-    File       Submission_File @relation(fields: [file_id], references: [file_id])
+    File       Submission_Files @relation(fields: [file_id], references: [file_id])
 }
