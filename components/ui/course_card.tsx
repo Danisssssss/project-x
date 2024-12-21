@@ -1,52 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import styles from "./course_card.module.css";
 import Image from "next/image";
 import { useBreadcrumbs } from "../../src/app/BreadcrumbsContext";
-import { Popover, OverlayTrigger } from "react-bootstrap";
 
 interface CourseCardProps {
   title: string;
+  teacherName?: string; // Пропс для имени преподавателя
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, teacherName }) => {
   const { setBreadcrumbs } = useBreadcrumbs();
   const router = useRouter();
-  const [showPopover, setShowPopover] = useState(false);
 
   const handleClick = () => {
     setBreadcrumbs(title);
     router.push("/course/feed");
   };
 
-  const handlePopoverToggle = () => {
-    setShowPopover((prev) => !prev);
-  };
-
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Дополнительные действия</Popover.Header>
-      <Popover.Body>Здесь можно добавить дополнительные действия.</Popover.Body>
-    </Popover>
-  );
-
   return (
     <div className={styles.course_card} onClick={handleClick}>
       <div className={styles.top}>
         <div className={styles.title}>{title}</div>
-        <OverlayTrigger
-          trigger="click"
-          placement="bottom"
-          overlay={popover}
-          show={showPopover}
-          onToggle={handlePopoverToggle}
-        >
-          <a href="#" className={styles.more}>
-            <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
-          </a>
-        </OverlayTrigger>
+        {teacherName && <div className={styles.teacher}>Преподаватель: {teacherName}</div>} {/* Отображаем имя преподавателя */}
+        <a href="#" className={styles.more}>
+          <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
+        </a>
       </div>
       <div className={styles.bottom}></div>
     </div>
