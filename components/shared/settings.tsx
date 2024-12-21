@@ -6,18 +6,18 @@ import styles from "./settings.module.css";
 const Settings = () => {
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
+    email: "", // Добавляем email
   });
 
   useEffect(() => {
-    // Попытка получить данные пользователя из localStorage
+    // Получение данных пользователя из localStorage
     const user = localStorage.getItem("user");
     if (user) {
       try {
         const { fullName, email } = JSON.parse(user); // Получаем имя и email пользователя
         setFormData({
           fullName: fullName || "",
-          email: email || "",
+          email: email || "", // Заполняем email
         });
       } catch (error) {
         console.error("Ошибка при чтении данных пользователя:", error);
@@ -32,31 +32,35 @@ const Settings = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.fullName || !formData.email) {
+      alert("Имя и email обязательны для обновления");
+      return;
+    }
+
     try {
       // Отправка данных на сервер
       const response = await fetch("/api/update-profile", {
-        method: "PUT", // Используем PUT для обновления данных
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.fullName,
-          email: formData.email,
+          email: formData.email, // Отправляем email
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Если данные успешно обновлены, сохраняем их в localStorage
+        // Если данные успешно обновлены, сохраняем имя в localStorage
         localStorage.setItem("user", JSON.stringify({ fullName: formData.fullName, email: formData.email }));
-        console.log("Данные пользователя обновлены:", data);
-
-        // Показываем alert, что данные были изменены
         alert("Данные успешно изменены");
+        window.location.reload();
       } else {
         console.error("Ошибка обновления данных:", data.message);
-        alert("Произошла ошибка при обновлении данных");
+        alert(`Произошла ошибка при обновлении данных: ${data.message}`);
       }
     } catch (err) {
       console.error("Ошибка при отправке данных:", err);
@@ -67,7 +71,7 @@ const Settings = () => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h1 className={styles.title}>Профиль</h1>
-      
+
       <div className={styles.formGroup}>
         <input
           type="text"
@@ -75,19 +79,7 @@ const Settings = () => {
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
-          placeholder={formData.fullName || "Введите ваше имя"}
-          required
-        />
-      </div>
-
-      <div className={styles.formGroup}>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder={formData.email || "Введите почту"}
+          placeholder="Введите ваше имя"
           required
         />
       </div>
