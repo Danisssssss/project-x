@@ -1,6 +1,6 @@
 .sidebar {
     grid-area: sidebar;
-    position: sticky;
+    /* position: sticky; */
     width: 333px;
     left: 0;
     top: 70px;

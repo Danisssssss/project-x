@@ -38,18 +38,6 @@ const Settins = () => {
 
             <div className={styles.formGroup}>
             <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Введите ваш email"
-                required
-            />
-            </div>
-
-            <div className={styles.formGroup}>
-            <input
                 type="textg"
                 id="password"
                 name="password"

@@ -4,6 +4,9 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
 import { useBreadcrumbs } from "../../src/app/BreadcrumbsContext";
 
+import LoginModal from "../modal/LoginModal"; // Импортируем модальное окно
+import RegisterModal from "../modal/RegisterModal"; // Импортируем модальное окно
+
 interface SidebarProps {
   isActive: boolean;
 }
@@ -12,6 +15,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
   const router = useRouter();
   const { setBreadcrumbs } = useBreadcrumbs();
   const [activeLink, setActiveLink] = useState("/");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Состояние для модального окна
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); // Состояние для окна регистрации
 
   useEffect(() => {
     // Загружаем активный пункт из localStorage при первом рендере
@@ -28,6 +33,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
     router.push(href);
   };
 
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
+  const openRegisterModal = () => setIsRegisterModalOpen(true);
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
   return (
     <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
       <div className={styles.wrapper}>
@@ -40,16 +51,30 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
         </div>
         <div
           className={`${styles.item} ${activeLink === "/settings" ? styles.active : ""}`}
-          onClick={() => handleClick("/settings", "Настройки")}
+          onClick={() => handleClick("/settings", "Личный кабинет")}
         >
           <Image src="/assets/images/settings.svg" alt="" width={18} height={20} />
-          <span className={styles.text}>Настройки</span>
+          <span className={styles.text}>Личный кабинет</span>
         </div>
-        <a href="#" className={styles.item}>
+        <a href="#" className={styles.item}
+          onClick={(e) => {
+            e.preventDefault();
+            openLoginModal();
+          }}>
           <Image src="/assets/images/exit.svg" alt="" width={18} height={18} />
-          <span className={styles.text}>Выйти</span>
+          <span className={styles.text}>Войти</span>
+        </a>
+        <a href="#" className={styles.item}
+          onClick={(e) => {
+            e.preventDefault();
+            openRegisterModal();
+          }}>
+          <Image src="/assets/images/exit.svg" alt="" width={18} height={18} />
+          <span className={styles.text}>Зарегистрироваться</span>
         </a>
       </div>
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      <RegisterModal isOpen={isRegisterModalOpen} onClose={closeRegisterModal} />
     </div>
   );
 };

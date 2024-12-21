@@ -85,3 +85,7 @@
     border-radius: 30px;
     background-color: var(--color-cadet-grey);
 }
+
+.name {
+    margin-left: 10px;
+}

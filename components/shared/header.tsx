@@ -31,6 +31,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                 <a href="#" className={styles.plus}>
                     <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
                 </a>
+                <span className={styles.name}>Фамилия Имя Отчество</span>
             </div>
         </div>
       </div>
