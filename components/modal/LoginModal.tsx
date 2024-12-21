@@ -13,24 +13,38 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      // Успешный логин, сохраняем токен в localStorage
-      localStorage.setItem("token", data.token);
-      onClose(); // Закрыть модальное окно
-    } else {
-      // Если ошибка, отображаем сообщение
-      setError(data.message || "Ошибка при авторизации");
+  
+    if (!email || !password) {
+      setError("Пожалуйста, заполните все поля");
+      return;
+    }
+  
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log("Успешный вход:", data); // Выводим данные в консоль
+        localStorage.setItem("token", data.token); // Сохраняем токен
+        if (data.fullName) {
+          localStorage.setItem("user", JSON.stringify({ fullName: data.fullName, email })); // Сохраняем имя пользователя
+        }
+        onClose(); // Закрываем модальное окно
+        window.location.reload(); // Перезагружаем страницу
+      } else {
+        console.error("Ошибка авторизации:", data.message);
+        setError(data.message || "Ошибка при авторизации");
+      }
+    } catch (err) {
+      console.error("Ошибка авторизации:", err);
+      setError("Произошла ошибка, попробуйте позже");
     }
   };
 

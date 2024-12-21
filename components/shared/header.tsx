@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,30 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const { breadcrumbs } = useBreadcrumbs();
+  const [userName, setUserName] = useState<string>("Гость");
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Состояние для проверки авторизации
+
+  useEffect(() => {
+    // Проверка наличия токена в localStorage для определения авторизации
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true); // Пользователь авторизован
+    } else {
+      setIsAuthenticated(false); // Пользователь не авторизован
+    }
+
+    // Попытка получить данные пользователя из localStorage
+    const user = localStorage.getItem("user");
+    if (user) {
+      try {
+        const { fullName } = JSON.parse(user); // Получаем имя пользователя
+        setUserName(fullName || "Гость (не могу прачитать имя)");
+      } catch (error) {
+        console.error("Ошибка при чтении данных пользователя:", error);
+        setUserName("Гость не вошел");
+      }
+    }
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -28,11 +52,13 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </div>
           </div>
           <div className={styles.user}>
-                <a href="#" className={styles.plus}>
-                    <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
-                </a>
-                <span className={styles.name}>Фамилия Имя Отчество</span>
-            </div>
+            {isAuthenticated && (
+              <a href="#" className={styles.plus}>
+                <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
+              </a>
+            )}
+            <span className={styles.name}>{userName}</span>
+          </div>
         </div>
       </div>
     </header>
