@@ -12,6 +12,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const { breadcrumbs } = useBreadcrumbs();
   const [userName, setUserName] = useState<string>("Гость");
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Состояние для проверки авторизации
+  const [userRole, setUserRole] = useState<string>(""); // Состояние для роли пользователя
 
   useEffect(() => {
     // Проверка наличия токена в localStorage для определения авторизации
@@ -22,12 +23,36 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
       setIsAuthenticated(false); // Пользователь не авторизован
     }
 
+    // Если токен есть, отправляем запрос на сервер, чтобы получить роль пользователя
+    if (token) {
+      const fetchUserRole = async () => {
+        try {
+          const response = await fetch("/api/current-role", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setUserRole(data.role || ""); // Устанавливаем роль
+          } else {
+            console.error("Ошибка при получении роли пользователя");
+          }
+        } catch (error) {
+          console.error("Ошибка при запросе роли пользователя:", error);
+        }
+      };
+
+      fetchUserRole();
+    }
+
     // Попытка получить данные пользователя из localStorage
     const user = localStorage.getItem("user");
     if (user) {
       try {
         const { fullName } = JSON.parse(user); // Получаем имя пользователя
-        setUserName(fullName || "Гость (не могу прачитать имя)");
+        setUserName(fullName || "Гость");
       } catch (error) {
         console.error("Ошибка при чтении данных пользователя:", error);
         setUserName("Гость не вошел");
@@ -52,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </div>
           </div>
           <div className={styles.user}>
-            {isAuthenticated && (
+            {isAuthenticated && userRole === "Преподаватель" && ( // Показываем только для преподавателей
               <a href="#" className={styles.plus}>
                 <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
               </a>
