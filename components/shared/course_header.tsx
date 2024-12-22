@@ -1,41 +1,41 @@
-"use client"; // Убедитесь, что это присутствует в начале файла
+"use client";
 
 import React, { useState, useEffect } from "react";
 import styles from "./course_header.module.css";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Используем usePathname вместо useRouter
+import { usePathname, useParams } from "next/navigation";
 
 const CourseHeader = () => {
-    const pathname = usePathname(); // Получаем текущий путь
-    const [activeLink, setActiveLink] = useState("/course/feed");
+    const pathname = usePathname(); // Текущий путь
+    const { courseId } = useParams(); // Получаем courseId из URL
+    const [activeLink, setActiveLink] = useState("");
 
-    // Используем useEffect, чтобы установить активный элемент при загрузке страницы
     useEffect(() => {
-        setActiveLink(pathname); // Устанавливаем активный элемент в зависимости от текущего пути
+        setActiveLink(pathname); // Устанавливаем активный элемент
     }, [pathname]);
 
-    const handleClick = (href: string) => {
-        setActiveLink(href); // Меняем активный элемент при клике
-    };
+    const generateLink = (path: string) => `/course/${courseId}${path === "/" ? "" : path}`;
 
     return (
         <div className={styles.header}>
-            <Link href="/course/feed" className={`${styles.header_item} ${activeLink === "/course/feed" ? styles.active : ""}`}
-                onClick={() => handleClick("/course/feed")}>
+            <Link
+                href={generateLink("/")}
+                className={`${styles.header_item} ${activeLink === `/course/${courseId}` ? styles.active : ""}`}
+            >
                 <p>Лента</p>
             </Link>
-            <Link href="/course/tasks" className={`${styles.header_item} ${activeLink === "/course/tasks" ? styles.active : ""}`}
-                onClick={() => handleClick("/course/tasks")}>
+            <Link
+                href={generateLink("/tasks")}
+                className={`${styles.header_item} ${activeLink.endsWith("/tasks") ? styles.active : ""}`}
+            >
                 <p>Задания</p>
             </Link>
-            <Link href="/course/users" className={`${styles.header_item} ${activeLink === "/course/users" ? styles.active : ""}`}
-                onClick={() => handleClick("/course/users")}>
+            <Link
+                href={generateLink("/users")}
+                className={`${styles.header_item} ${activeLink.endsWith("/users") ? styles.active : ""}`}
+            >
                 <p>Пользователи</p>
             </Link>
-            {/* <Link href="/course/grades" className={`${styles.header_item} ${activeLink === "/course/grades" ? styles.active : ""}`}
-                onClick={() => handleClick("/course/grades")}>
-                <p>Оценки</p>
-            </Link> */}
         </div>
     );
 };

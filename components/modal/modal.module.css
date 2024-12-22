@@ -1,0 +1,65 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+  
+.modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 470px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 16px;
+}
+  
+.input {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--color-bright-gray);
+    border-radius: 4px;
+    color: var(--color-black);
+}
+
+.input::placeholder {
+    color: var(--color-quartz);
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+  
+.create {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-dark-jungle);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.cancel {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-white);
+    color: var(--color-dark-jungle);
+    border: 1px solid var(--color-cadet-grey);
+    border-radius: 5px;
+    cursor: pointer;
+}

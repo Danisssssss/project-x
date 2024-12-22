@@ -3,6 +3,7 @@ import styles from "./header.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useBreadcrumbs } from "../../src/app/BreadcrumbsContext";
+import Modal from "../modal/Modal"; // Подключите компонент модального окна (создадим его ниже)
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -11,20 +12,14 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const { breadcrumbs } = useBreadcrumbs();
   const [userName, setUserName] = useState<string>("Гость");
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Состояние для проверки авторизации
-  const [userRole, setUserRole] = useState<string>(""); // Состояние для роли пользователя
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Состояние для модального окна
 
   useEffect(() => {
-    // Проверка наличия токена в localStorage для определения авторизации
     const token = localStorage.getItem("token");
     if (token) {
-      setIsAuthenticated(true); // Пользователь авторизован
-    } else {
-      setIsAuthenticated(false); // Пользователь не авторизован
-    }
-
-    // Если токен есть, отправляем запрос на сервер, чтобы получить роль пользователя
-    if (token) {
+      setIsAuthenticated(true);
       const fetchUserRole = async () => {
         try {
           const response = await fetch("/api/current-role", {
@@ -32,10 +27,9 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
               Authorization: `Bearer ${token}`,
             },
           });
-
           if (response.ok) {
             const data = await response.json();
-            setUserRole(data.role || ""); // Устанавливаем роль
+            setUserRole(data.role || "");
           } else {
             console.error("Ошибка при получении роли пользователя");
           }
@@ -43,22 +37,46 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
           console.error("Ошибка при запросе роли пользователя:", error);
         }
       };
-
       fetchUserRole();
+    } else {
+      setIsAuthenticated(false);
     }
 
-    // Попытка получить данные пользователя из localStorage
     const user = localStorage.getItem("user");
     if (user) {
       try {
-        const { fullName } = JSON.parse(user); // Получаем имя пользователя
+        const { fullName } = JSON.parse(user);
         setUserName(fullName || "Гость");
       } catch (error) {
         console.error("Ошибка при чтении данных пользователя:", error);
-        setUserName("Гость не вошел");
+        setUserName("Гость");
       }
     }
   }, []);
+
+  const handleCreateCourse = async (title: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch("/api/courses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title }),
+      });
+      if (response.ok) {
+        console.log("Курс успешно создан");
+        alert(`Курс "${title}" успешно создан!`);
+        setIsModalOpen(false);
+        window.location.reload();
+      } else {
+        console.error("Ошибка при создании курса");
+      }
+    } catch (error) {
+      console.error("Ошибка при создании курса:", error);
+    }
+  };  
 
   return (
     <header className={styles.header}>
@@ -77,8 +95,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </div>
           </div>
           <div className={styles.user}>
-            {isAuthenticated && userRole === "Преподаватель" && ( // Показываем только для преподавателей
-              <a href="#" className={styles.plus}>
+            {isAuthenticated && userRole === "Преподаватель" && (
+              <a href="#" className={styles.plus} onClick={() => setIsModalOpen(true)}>
                 <Image src="/assets/images/plus.svg" alt="" width={16} height={16} />
               </a>
             )}
@@ -86,6 +104,12 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <Modal
+          onClose={() => setIsModalOpen(false)}
+          onCreate={handleCreateCourse}
+        />
+      )}
     </header>
   );
 };

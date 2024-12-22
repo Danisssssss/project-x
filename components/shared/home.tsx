@@ -47,7 +47,11 @@ const Home = () => {
         <div>Загрузка...</div> // Показываем загрузку
       ) : (
         courses.map((course) => (
-          <CourseCard key={course.course_id} title={course.title} />
+          <CourseCard
+            key={course.course_id}
+            courseId={course.course_id} // Передаем courseId
+            title={course.title}       // Передаем title
+          />
         ))
       )}
     </div>
