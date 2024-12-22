@@ -6,15 +6,41 @@
 }
 
 .title {
-    font-size: 36px;
+    font-size: 30px;
     color: var(--color-quartz);
     padding-bottom: 20px;
     margin-bottom: 20px;
     position: relative;
 }
 
-.student_title {
+.student_header {
     margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.student_header .title {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.student_header .title::after {
+    display: none;
+}
+
+.student_header::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-chinese-silver);
 }
 
 .title::after {
@@ -68,5 +94,19 @@
 }
 
 .more:hover {
+    background-color: var(--color-hover-button);
+}
+
+.add_user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    padding: 15px;
+    transition: background-color .1s linear;
+    border-radius: 30px;
+}
+
+.add_user:hover {
     background-color: var(--color-hover-button);
 }

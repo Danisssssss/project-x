@@ -5,7 +5,7 @@ async function up() {
     // Добавляем роли
     await prisma.role.createMany({
         data: [
-            { role_name: "Учитель" },
+            { role_name: "Преподаватель" },
             { role_name: "Студент" }
         ]
     });
