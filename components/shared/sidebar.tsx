@@ -4,8 +4,9 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
 import { useBreadcrumbs } from "../../src/app/BreadcrumbsContext";
 
-import LoginModal from "../modal/LoginModal"; // Импортируем модальное окно
-import RegisterModal from "../modal/RegisterModal"; // Импортируем модальное окно
+import LoginModal from "../modal/LoginModal";
+import RegisterModal from "../modal/RegisterModal";
+import ConfirmModal from "../modal/ConfirmModal"; // Импортируем модальное окно подтверждения
 
 interface SidebarProps {
   isActive: boolean;
@@ -15,20 +16,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
   const router = useRouter();
   const { setBreadcrumbs } = useBreadcrumbs();
   const [activeLink, setActiveLink] = useState("/");
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Состояние для модального окна
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); // Состояние для окна регистрации
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Состояние для проверки авторизации
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false); // Состояние для модального окна подтверждения
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Проверка наличия токена или данных о пользователе в localStorage
     const token = localStorage.getItem("token");
     if (token) {
-      setIsAuthenticated(true); // Пользователь авторизован
+      setIsAuthenticated(true);
     } else {
-      setIsAuthenticated(false); // Пользователь не авторизован
+      setIsAuthenticated(false);
     }
 
-    // Загружаем активный пункт из localStorage при первом рендере
     const savedActiveLink = localStorage.getItem("activeLink");
     if (savedActiveLink) {
       setActiveLink(savedActiveLink);
@@ -38,7 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
   const handleClick = (href: string, label: string) => {
     setActiveLink(href);
     setBreadcrumbs(label);
-    localStorage.setItem("activeLink", href); // Сохраняем активный пункт
+    localStorage.setItem("activeLink", href);
     router.push(href);
   };
 
@@ -49,14 +49,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
   const closeRegisterModal = () => setIsRegisterModalOpen(false);
 
   const handleLogout = () => {
-    // Очищаем данные пользователя из localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setIsAuthenticated(false); // Обновляем состояние авторизации
-    // Перенаправляем на страницу входа или главную
-    router.push("/"); // Можно заменить на "/"
-    window.location.reload(); // Перезагрузка страницы
+    setIsAuthenticated(false);
+    router.push("/");
+    window.location.reload();
   };
+
+  const openConfirmModal = () => setIsConfirmModalOpen(true);
+  const closeConfirmModal = () => setIsConfirmModalOpen(false);
 
   return (
     <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
@@ -98,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
           </a>
         )}
         {isAuthenticated && (
-          <a href="#" className={styles.item} onClick={handleLogout}>
+          <a href="#" className={styles.item} onClick={openConfirmModal}>
             <Image src="/assets/images/exit.svg" alt="" width={18} height={18} />
             <span className={styles.text}>Выйти</span>
           </a>
@@ -106,6 +107,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
       </div>
       <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
       <RegisterModal isOpen={isRegisterModalOpen} onClose={closeRegisterModal} />
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        onClose={closeConfirmModal}
+        onConfirm={handleLogout}
+        title="Вы уверены, что хотите выйти?"
+        description=""
+      />
     </div>
   );
 };
