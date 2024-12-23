@@ -113,7 +113,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
 
   const deleteUser = async () => {
     if (userToDelete === null) return;
-  
+
     try {
       const response = await fetch(`/api/course/${courseId}/users/delete`, {
         method: "DELETE", // Замените на DELETE
@@ -122,12 +122,12 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
         },
         body: JSON.stringify({ userId: userToDelete }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Ошибка при удалении пользователя");
       }
-  
+
       setStudents((prev) => prev.filter((student) => student.user_id !== userToDelete));
       setShowDeleteModal(false);
       setUserToDelete(null);
@@ -136,7 +136,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
       alert("Не удалось удалить пользователя");
     }
   };
-  
+
 
   return (
     <div className={styles.wrapper}>
@@ -171,17 +171,19 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
           <div key={student.user_id} className={styles.item}>
             <div className={styles.image}></div>
             <div className={styles.name}>{student.name}</div>
-            <a
-              href="#"
-              className={styles.more}
-              onClick={(e) => {
-                e.preventDefault();
-                setUserToDelete(student.user_id);
-                setShowDeleteModal(true);
-              }}
-            >
-              <Image src="/assets/images/delete-user.svg" width={20} height={20} alt="" />
-            </a>
+            {userRole === "Преподаватель" && (
+              <a
+                href="#"
+                className={styles.more}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setUserToDelete(student.user_id);
+                  setShowDeleteModal(true);
+                }}
+              >
+                <Image src="/assets/images/delete-user.svg" width={20} height={20} alt="" />
+              </a>
+            )}
           </div>
         ))}
       </div>
