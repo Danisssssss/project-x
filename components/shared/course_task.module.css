@@ -23,3 +23,61 @@
 .btn_add img {
     margin-right: 17px;
 }
+
+/* Основной стиль для модального окна */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+.modal_content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+}
+  
+.modal_content h2 {
+    margin-bottom: 20px;
+}
+  
+.modal_content label {
+    display: block;
+    margin-bottom: 10px;
+}
+  
+.modal_content input,
+.modal_content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  
+.modal_content button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.modal_content button[type="button"] {
+    background-color: #f44336;
+}
+  
+.modal_content button:hover {
+    opacity: 0.9;
+}
+  
