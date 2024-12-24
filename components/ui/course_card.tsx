@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./course_card.module.css";
 import Image from "next/image";
 import { useBreadcrumbs } from "../../src/app/BreadcrumbsContext";
 
 interface CourseCardProps {
-  courseId: number;  // Используем ID курса для передачи в маршрут
+  courseId: number; // Используем ID курса для передачи в маршрут
   title: string;
   teacherName?: string;
 }
@@ -17,39 +17,62 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseId, title, teacherName })
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
   const [newTitle, setNewTitle] = useState(title); // Состояние для нового названия курса
+  const [userRole, setUserRole] = useState<string>(""); // Роль пользователя
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const fetchUserRole = async () => {
+        try {
+          const response = await fetch("/api/current-role", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUserRole(data.role || "");
+          } else {
+            console.error("Ошибка при получении роли пользователя");
+          }
+        } catch (error) {
+          console.error("Ошибка при запросе роли пользователя:", error);
+        }
+      };
+      fetchUserRole();
+    }
+  }, []);
 
   const handleClick = (e: React.MouseEvent) => {
-    // Проверяем, что клик был именно по элементу с классом title
     if (e.target && (e.target as HTMLElement).classList.contains(styles.title)) {
       setBreadcrumbs(title);
-      router.push(`/course/${courseId}`);  // Переход по динамическому маршруту
+      router.push(`/course/${courseId}`);
     }
   };
 
   const handleMoreClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Останавливаем переход по клику на карточку
-    setIsModalOpen(true); // Открываем модальное окно
+    e.stopPropagation();
+    setIsModalOpen(true);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false); // Закрываем модальное окно без изменений
-    setNewTitle(title); // Возвращаем исходное название
+    setIsModalOpen(false);
+    setNewTitle(title);
   };
 
   const handleSave = async () => {
     try {
-      // Отправляем запрос на сервер для обновления названия курса
       const response = await fetch(`/api/courses/${courseId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: newTitle }), // Отправляем новое название курса
+        body: JSON.stringify({ title: newTitle }),
       });
 
       if (response.ok) {
         console.log("Название курса успешно обновлено!");
-        setIsModalOpen(false); // Закрываем модальное окно
+        setIsModalOpen(false);
         window.location.reload();
       } else {
         console.error("Ошибка при обновлении названия курса");
@@ -64,13 +87,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseId, title, teacherName })
       <div className={styles.top}>
         <div className={styles.title}>{title}</div>
         {teacherName && <div className={styles.teacher}>Преподаватель: {teacherName}</div>}
-        <a href="#" className={styles.more} onClick={handleMoreClick}>
-          <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
-        </a>
+        {userRole === "Преподаватель" && (
+          <a href="#" className={styles.more} onClick={handleMoreClick}>
+            <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
+          </a>
+        )}
       </div>
       <div className={styles.bottom}></div>
 
-      {/* Модальное окно для редактирования названия курса */}
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
@@ -80,7 +104,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseId, title, teacherName })
                 type="text"
                 className={styles.input}
                 value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)} // Обновляем состояние нового названия
+                onChange={(e) => setNewTitle(e.target.value)}
               />
             </label>
             <div className={styles.modal_buttons}>
