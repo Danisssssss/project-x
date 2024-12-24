@@ -21,6 +21,7 @@ const Course_task: React.FC = () => {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userRole, setUserRole] = useState<string>(""); // Роль пользователя
   const [newAssignment, setNewAssignment] = useState({
     title: "",
     description: "",
@@ -33,6 +34,27 @@ const Course_task: React.FC = () => {
       setError("Идентификатор курса отсутствует.");
       return;
     }
+
+    // Получаем роль пользователя
+    const token = localStorage.getItem("token");
+    const fetchUserRole = async () => {
+      try {
+        const response = await fetch("/api/current-role", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUserRole(data.role || "");
+        } else {
+          console.error("Ошибка при получении роли пользователя");
+        }
+      } catch (error) {
+        console.error("Ошибка при запросе роли пользователя:", error);
+      }
+    };
+    fetchUserRole();
 
     const fetchAssignments = async () => {
       try {
@@ -94,14 +116,16 @@ const Course_task: React.FC = () => {
     <div className={styles.wrapper}>
       {error && <p className={styles.error}>{error}</p>}
 
-      <a
-        href="#"
-        className={styles.btn_add}
-        onClick={() => setIsModalOpen(true)}
-      >
-        <Image src="/assets/images/plus-white.svg" alt="+" width={16} height={16} />
-        <p>Создать</p>
-      </a>
+      {userRole === "Преподаватель" && ( // Проверка роли
+        <a
+          href="#"
+          className={styles.btn_add}
+          onClick={() => setIsModalOpen(true)}
+        >
+          <Image src="/assets/images/plus-white.svg" alt="+" width={16} height={16} />
+          <p>Создать</p>
+        </a>
+      )}
 
       {assignments.map((assignment) => (
         <Course_task_item key={assignment.assignment_id} assignment={assignment} />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./course_task_item.module.css";
 import Link from "next/link";
@@ -19,10 +19,34 @@ interface AssignmentProps {
 
 const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
   const [isActive, setIsActive] = useState(false);
+  const [userRole, setUserRole] = useState<string>("");
 
   const toggleActive = () => {
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    // Получаем роль пользователя
+    const token = localStorage.getItem("token");
+    const fetchUserRole = async () => {
+      try {
+        const response = await fetch("/api/current-role", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUserRole(data.role || "");
+        } else {
+          console.error("Ошибка при получении роли пользователя");
+        }
+      } catch (error) {
+        console.error("Ошибка при запросе роли пользователя:", error);
+      }
+    };
+    fetchUserRole();
+  }, []);
 
   return (
     <div
@@ -42,16 +66,18 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
         <div className={styles.item_main_left}>
           <div className={styles.instruction}>{assignment.description}</div>
         </div>
-        <div className={styles.item_main_right}>
-          <div className={styles.passed}>
-            <div className={styles.passed_count}>{assignment.submissions_count}</div>
-            <p>Сдано</p>
+        {userRole === "Преподаватель" && ( // Отображаем только для преподавателей
+          <div className={styles.item_main_right}>
+            <div className={styles.passed}>
+              <div className={styles.passed_count}>{assignment.submissions_count}</div>
+              <p>Сдано</p>
+            </div>
+            <div className={styles.not_passed}>
+              <div className={styles.not_passed_count}>{assignment.not_submitted_count}</div>
+              <p>Не сдано</p>
+            </div>
           </div>
-          <div className={styles.not_passed}>
-            <div className={styles.not_passed_count}>{assignment.not_submitted_count}</div>
-            <p>Не сдано</p>
-          </div>
-        </div>
+        )}
         <div className={styles.files}>
           {assignment.files.map((file) => (
             <a
