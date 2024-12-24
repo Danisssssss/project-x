@@ -74,18 +74,18 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseId, title, teacherName })
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
-            <h2>Редактировать название курса</h2>
+            <h2 className={styles.title_modal}>Редактировать название курса</h2>
             <label>
-              Новое название:
               <input
                 type="text"
+                className={styles.input}
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)} // Обновляем состояние нового названия
               />
             </label>
             <div className={styles.modal_buttons}>
-              <button onClick={handleCancel}>Отмена</button>
-              <button onClick={handleSave}>Изменить</button>
+              <button className={styles.cancel} onClick={handleCancel}>Отмена</button>
+              <button className={styles.change} onClick={handleSave}>Изменить</button>
             </div>
           </div>
         </div>
