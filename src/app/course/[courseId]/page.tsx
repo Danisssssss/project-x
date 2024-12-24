@@ -3,43 +3,66 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import styles from "../../../../components/shared/course_feed.module.css"; // Переиспользуем стили
+import styles from "../../../../components/shared/course_feed.module.css";
 
 const CoursePage = () => {
-  const { courseId } = useParams(); // Получаем courseId из URL
-  const [course, setCourse] = useState<{ title: string } | null>(null); // Указываем тип данных
-  const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
-  const [newTitle, setNewTitle] = useState(course?.title || ""); // Состояние для нового названия курса
+  const { courseId } = useParams();
+  const [course, setCourse] = useState<{ title: string } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState(course?.title || "");
+  const [userRole, setUserRole] = useState<string>("");
 
   useEffect(() => {
-    if (courseId) {
-      const fetchCourse = async () => {
+    const fetchUserRole = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const response = await fetch("/api/current-role", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUserRole(data.role || "");
+          } else {
+            console.error("Ошибка при получении роли пользователя");
+          }
+        } catch (error) {
+          console.error("Ошибка при запросе роли пользователя:", error);
+        }
+      }
+    };
+
+    const fetchCourse = async () => {
+      if (courseId) {
         try {
           const response = await fetch(`/api/courses/${courseId}`);
           if (response.ok) {
             const courseData = await response.json();
             setCourse(courseData);
-            setNewTitle(courseData.title); // Инициализируем новое название курса
+            setNewTitle(courseData.title);
           } else {
             console.error("Ошибка загрузки данных курса");
           }
         } catch (error) {
           console.error("Ошибка при запросе:", error);
         }
-      };
+      }
+    };
 
-      fetchCourse();
-    }
+    fetchUserRole();
+    fetchCourse();
   }, [courseId]);
 
   const handleMoreClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Останавливаем переход по клику на карточку
-    setIsModalOpen(true); // Открываем модальное окно
+    e.stopPropagation();
+    setIsModalOpen(true);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false); // Закрываем модальное окно без изменений
-    setNewTitle(course?.title || ""); // Возвращаем исходное название
+    setIsModalOpen(false);
+    setNewTitle(course?.title || "");
   };
 
   const handleSave = async () => {
@@ -55,8 +78,8 @@ const CoursePage = () => {
 
         if (response.ok) {
           const updatedCourse = await response.json();
-          setCourse(updatedCourse); // Обновляем курс с новым названием
-          setIsModalOpen(false); // Закрываем модальное окно
+          setCourse(updatedCourse);
+          setIsModalOpen(false);
         } else {
           console.error("Ошибка при обновлении курса");
         }
@@ -64,7 +87,7 @@ const CoursePage = () => {
         console.error("Ошибка при запросе:", error);
       }
     } else {
-      setIsModalOpen(false); // Закрываем модальное окно, если название не изменилось
+      setIsModalOpen(false);
     }
   };
 
@@ -76,27 +99,32 @@ const CoursePage = () => {
     <div className={styles.wrapper}>
       <div className={styles.banner}>
         <div className={styles.title}>{course.title}</div>
-        <div className={styles.more} onClick={handleMoreClick}>
-          <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
-        </div>
+        {userRole === "Преподаватель" && (
+          <div className={styles.more} onClick={handleMoreClick}>
+            <Image src="/assets/images/more.svg" alt="" width={4} height={18} />
+          </div>
+        )}
       </div>
 
-      {/* Модальное окно для редактирования названия курса */}
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
-          <h2 className={styles.title_modal}>Редактировать название курса</h2>
+            <h2 className={styles.title_modal}>Редактировать название курса</h2>
             <label>
               <input
                 type="text"
                 className={styles.input}
                 value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)} // Обновляем состояние нового названия
+                onChange={(e) => setNewTitle(e.target.value)}
               />
             </label>
             <div className={styles.modal_buttons}>
-              <button className={styles.cancel} onClick={handleCancel}>Отмена</button>
-              <button className={styles.change} onClick={handleSave}>Изменить</button>
+              <button className={styles.cancel} onClick={handleCancel}>
+                Отмена
+              </button>
+              <button className={styles.change} onClick={handleSave}>
+                Изменить
+              </button>
             </div>
           </div>
         </div>
