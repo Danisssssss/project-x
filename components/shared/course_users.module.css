@@ -110,3 +110,19 @@
 .add_user:hover {
     background-color: var(--color-hover-button);
 }
+
+.select_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_student {
+    padding: 15px 40px;
+    background-color: var(--color-dark-jungle);
+    color: var(--color-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+}

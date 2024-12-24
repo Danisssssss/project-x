@@ -58,6 +58,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
         const data = await response.json();
         setTeachers(data.teachers);
         setStudents(data.students);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Не удалось загрузить данные пользователей.");
       }
@@ -75,6 +76,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
       }
       const data = await response.json();
       setAllUsers(data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Не удалось загрузить список всех пользователей.");
     }
@@ -132,6 +134,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
       setShowDeleteModal(false);
       setUserToDelete(null);
       alert("Пользователь успешно удален");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       alert("Не удалось удалить пользователя");
     }
@@ -194,7 +197,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       >
-        <div>
+        <div className={styles.select_wrapper}>
           <select
             value={selectedUser || ""}
             onChange={(e) => setSelectedUser(Number(e.target.value))}
@@ -208,7 +211,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
               </option>
             ))}
           </select>
-          <button onClick={addUser}>Добавить</button>
+          <button onClick={addUser} className={styles.add_student}>Добавить</button>
         </div>
       </Modal>
 
