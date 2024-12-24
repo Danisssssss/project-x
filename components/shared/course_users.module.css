@@ -136,3 +136,28 @@
 .select_user:focus {
     outline: none;
 }
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-white);
+    color: var(--color-dark-jungle);
+    border: 1px solid var(--color-cadet-grey);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete_user {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-dark-jungle);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

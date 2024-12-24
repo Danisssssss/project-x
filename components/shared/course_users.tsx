@@ -222,9 +222,9 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
           isOpen={showDeleteModal}
           onClose={() => setShowDeleteModal(false)}
         >
-          <div>
-            <button onClick={() => setShowDeleteModal(false)}>Отмена</button>
-            <button onClick={deleteUser}>Удалить</button>
+          <div className={styles.buttons}>
+            <button className={styles.cancel} onClick={() => setShowDeleteModal(false)}>Отмена</button>
+            <button className={styles.delete_user} onClick={deleteUser}>Удалить</button>
           </div>
         </Modal>
       )}
