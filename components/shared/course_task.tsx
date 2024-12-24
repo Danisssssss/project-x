@@ -21,12 +21,12 @@ const Course_task: React.FC = () => {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userRole, setUserRole] = useState<string>(""); // Роль пользователя
+  const [userRole, setUserRole] = useState<string>("");
   const [newAssignment, setNewAssignment] = useState({
     title: "",
     description: "",
     max_grade: 0,
-    files: [] as File[], // Состояние для файлов
+    files: [] as File[],
   });
 
   useEffect(() => {
@@ -35,7 +35,6 @@ const Course_task: React.FC = () => {
       return;
     }
 
-    // Получаем роль пользователя
     const token = localStorage.getItem("token");
     const fetchUserRole = async () => {
       try {
@@ -76,13 +75,12 @@ const Course_task: React.FC = () => {
 
   const handleAddAssignment = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const formData = new FormData();
     formData.append("title", newAssignment.title);
     formData.append("description", newAssignment.description);
     formData.append("max_grade", newAssignment.max_grade.toString());
-    
-    // Добавляем файлы в FormData
+
     newAssignment.files.forEach((file) => {
       formData.append("files", file);
     });
@@ -92,11 +90,12 @@ const Course_task: React.FC = () => {
         method: "POST",
         body: formData,
       });
-      
+
       if (!response.ok) {
         throw new Error("Ошибка при добавлении задания");
       }
-      setIsModalOpen(false); // Закрываем модальное окно
+      setIsModalOpen(false);
+      setNewAssignment({ title: "", description: "", max_grade: 0, files: [] });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Не удалось добавить задание.");
@@ -105,18 +104,34 @@ const Course_task: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
+      const validFiles = Array.from(e.target.files).filter((file) =>
+        ["image/png", "image/jpeg", "application/pdf"].includes(file.type)
+      );
+
+      if (validFiles.length + newAssignment.files.length > 5) {
+        alert("Вы можете загрузить не более 5 файлов.");
+        return;
+      }
+
       setNewAssignment({
         ...newAssignment,
-        files: Array.from(e.target.files), // Добавляем выбранные файлы в состояние
+        files: [...newAssignment.files, ...validFiles],
       });
     }
+  };
+
+  const removeFile = (index: number) => {
+    setNewAssignment({
+      ...newAssignment,
+      files: newAssignment.files.filter((_, i) => i !== index),
+    });
   };
 
   return (
     <div className={styles.wrapper}>
       {error && <p className={styles.error}>{error}</p>}
 
-      {userRole === "Преподаватель" && ( // Проверка роли
+      {userRole === "Преподаватель" && (
         <a
           href="#"
           className={styles.btn_add}
@@ -131,7 +146,6 @@ const Course_task: React.FC = () => {
         <Course_task_item key={assignment.assignment_id} assignment={assignment} />
       ))}
 
-      {/* Модальное окно */}
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
@@ -170,6 +184,16 @@ const Course_task: React.FC = () => {
                 Файлы:
                 <input type="file" multiple onChange={handleFileChange} />
               </label>
+              <ul>
+                {newAssignment.files.map((file, index) => (
+                  <li key={index}>
+                    {file.name}
+                    <button type="button" onClick={() => removeFile(index)}>
+                      Удалить
+                    </button>
+                  </li>
+                ))}
+              </ul>
               <button type="submit">Сохранить</button>
               <button type="button" onClick={() => setIsModalOpen(false)}>
                 Закрыть
