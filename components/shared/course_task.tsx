@@ -96,6 +96,7 @@ const Course_task: React.FC = () => {
       }
       setIsModalOpen(false);
       setNewAssignment({ title: "", description: "", max_grade: 0, files: [] });
+      window.location.reload();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Не удалось добавить задание.");
