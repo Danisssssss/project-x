@@ -198,7 +198,7 @@ const Course_users: React.FC<CourseUsersProps> = ({ courseId }) => {
         onClose={() => setShowModal(false)}
       >
         <div className={styles.select_wrapper}>
-          <select
+          <select className={styles.select_user}
             value={selectedUser || ""}
             onChange={(e) => setSelectedUser(Number(e.target.value))}
           >
