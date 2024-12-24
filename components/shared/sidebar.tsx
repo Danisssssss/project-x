@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsAuthenticated(false);
-    router.push("/"); // Перенаправление на главную страницу
+    router.push("/home"); // Перенаправление на главную страницу
     setIsConfirmModalOpen(false);
     window.location.reload();
   };
