@@ -54,6 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isActive }) => {
     setIsAuthenticated(false);
     router.push("/"); // Перенаправление на главную страницу
     setIsConfirmModalOpen(false);
+    window.location.reload();
   };
 
   const openConfirmModal = () => setIsConfirmModalOpen(true);
