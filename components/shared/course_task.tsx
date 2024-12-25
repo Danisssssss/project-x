@@ -106,8 +106,30 @@ const Course_task: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const validFiles = Array.from(e.target.files).filter((file) =>
-        ["image/png", "image/jpeg", "application/pdf"].includes(file.type)
-      );
+        [
+          // Изображения
+          "image/png", "image/jpeg", 
+          // PDF
+          "application/pdf", 
+          // Текстовые файлы
+          "text/plain", 
+          // Документы Word
+          "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          // Программные файлы
+          "application/javascript", // .js
+          "application/typescript", // .ts
+          "text/x-python", // .py
+          "text/x-java-source", // .java
+          "text/x-c++src", // .cpp, .h
+          "text/html", // .html
+          "text/css", // .css
+          "application/x-sh", // .sh (bash scripts)
+          "application/x-perl", // .pl (Perl scripts)
+          "text/x-ruby", // .rb (Ruby scripts)
+          "application/json", // .json
+          "text/x-sql", // .sql
+        ].includes(file.type)
+      );      
 
       if (validFiles.length + newAssignment.files.length > 5) {
         alert("Вы можете загрузить не более 5 файлов.");
