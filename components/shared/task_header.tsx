@@ -1,39 +1,33 @@
-"use client"; // Убедитесь, что это присутствует в начале файла
+"use client";
 
 import React, { useState, useEffect } from "react";
 import styles from "./course_header.module.css";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Используем usePathname вместо useRouter
+import { usePathname, useParams } from "next/navigation";
 
 const TaskHeader = () => {
-  const pathname = usePathname(); // Получаем текущий путь
-  const [activeLink, setActiveLink] = useState("/task/instruction");
+  const pathname = usePathname(); // Текущий путь
+  const { taskId } = useParams(); // Получаем taskId из параметров маршрута
+  const [activeLink, setActiveLink] = useState("");
 
-  // Используем useEffect, чтобы установить активный элемент при загрузке страницы
   useEffect(() => {
-    setActiveLink(pathname); // Устанавливаем активный элемент в зависимости от текущего пути
+    setActiveLink(pathname); // Устанавливаем активный элемент
   }, [pathname]);
 
-  const handleClick = (href: string) => {
-    setActiveLink(href); // Меняем активный элемент при клике
-  };
-
-  // Обработка случая, когда путь содержит taskId
-  const basePath = pathname.split('/')[0] === 'task' ? '/task' : ''; // Извлекаем базовый путь "/task" без taskId
+  const generateLink = (path: string) => `/task/${taskId}${path}`;
 
   return (
     <div className={styles.header}>
+      {/* Проверяем, что путь соответствует `/task/[taskId]` */}
       <Link
-        href={`${basePath}/instruction`}
-        className={`${styles.header_item} ${activeLink.includes("/task/instruction") ? styles.active : ""}`}
-        onClick={() => handleClick(`${basePath}/instruction`)}
+        href={`/task/${taskId}`}
+        className={`${styles.header_item} ${activeLink === `/task/${taskId}` ? styles.active : ""}`}
       >
         <p>Инструкции</p>
       </Link>
       <Link
-        href={`${basePath}/students_work`}
-        className={`${styles.header_item} ${activeLink.includes("/task/students_work") ? styles.active : ""}`}
-        onClick={() => handleClick(`${basePath}/students_work`)}
+        href={generateLink("/students_work")}
+        className={`${styles.header_item} ${activeLink.includes("/students_work") ? styles.active : ""}`}
       >
         <p>Работы учащихся</p>
       </Link>
