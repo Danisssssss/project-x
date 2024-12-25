@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./task_instruction.module.css";
 import Image from "next/image";
 
-// Типы данных для задания
 interface File {
   file_name: string;
   file_path: string;
@@ -13,10 +12,41 @@ interface TaskInstructionProps {
   description: string;
   max_grade: number;
   files: File[];
-  teacherName: string; // Новое свойство для имени преподавателя
+  teacherName: string;
 }
 
-const Task_instruction: React.FC<TaskInstructionProps> = ({ title, description, max_grade, files, teacherName }) => {
+const Task_instruction: React.FC<TaskInstructionProps> = ({
+  title,
+  description,
+  max_grade,
+  files,
+  teacherName,
+}) => {
+  const [role, setRole] = useState<string | null>(null);
+
+  // Функция для получения роли пользователя
+  const fetchUserRole = async () => {
+    try {
+      const res = await fetch("/api/current-role", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Токен из локального хранилища
+        },
+      });
+
+      const data = await res.json();
+      if (data.role) {
+        setRole(data.role); // Сохраняем роль пользователя
+      }
+    } catch (error) {
+      console.error("Ошибка при получении роли пользователя:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserRole(); // Получаем роль при монтировании компонента
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.task_wrapper}>
@@ -41,17 +71,19 @@ const Task_instruction: React.FC<TaskInstructionProps> = ({ title, description, 
           </div>
         </div>
       </div>
-      <div className={styles.pass}>
-        <div className={styles.pass_title}>Мои задания</div>
-        <a href="#" className={styles.add_btn}>
-          <Image src="/assets/images/plus.svg" alt="+" width={14} height={14} />
-          Добавить файлы
-          <input type="file" style={{ display: "none" }} />
-        </a>
-        <button className={styles.pass_btn}>
-          Сдать
-        </button>
-      </div>
+
+      {/* Отображаем только для студентов */}
+      {role === "Студент" && (
+        <div className={styles.pass}>
+          <div className={styles.pass_title}>Мои задания</div>
+          <a href="#" className={styles.add_btn}>
+            <Image src="/assets/images/plus.svg" alt="+" width={14} height={14} />
+            Добавить файлы
+            <input type="file" style={{ display: "none" }} />
+          </a>
+          <button className={styles.pass_btn}>Сдать</button>
+        </div>
+      )}
     </div>
   );
 };
