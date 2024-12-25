@@ -5,9 +5,9 @@ import Image from "next/image";
 import styles from "./course_task_item.module.css";
 import Link from "next/link";
 
-interface File {  
-  file_name: string;  
-  file_path: string;  
+interface File {
+  file_name: string;
+  file_path: string;
 }
 
 interface AssignmentProps {
@@ -53,7 +53,7 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
       }));
       setNewFiles((prev) => [...prev, ...filesArray]);
     }
-  };  
+  };
 
   const handleDeleteFile = (fileIndex: number, isNewFile: boolean) => {
     if (isNewFile) {
@@ -69,21 +69,22 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
-  
+
     formData.append("title", updatedAssignment.title);
     formData.append("description", updatedAssignment.description);
     formData.append("max_grade", updatedAssignment.max_grade.toString());
-  
+
+    // Добавляем файлы в FormData
     newFiles.forEach((file) => {
       formData.append("new_files", file.file_path); // Передаем файл, а не его путь
     });
-  
+
     try {
       const response = await fetch(`/api/course/${assignment.assignment_id}/update`, {
-        method: "POST", // Используем POST для загрузки файлов
+        method: "POST",
         body: formData,
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setUpdatedAssignment(data.assignment);
@@ -96,7 +97,6 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
       console.error("Ошибка при отправке данных:", error);
     }
   };
-  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
