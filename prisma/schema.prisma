@@ -11,6 +11,7 @@ datasource db {
 }
 
 // Таблицы:
+// Пользователь
 model User {
     user_id  Int    @id @default(autoincrement())
     name     String
@@ -25,6 +26,7 @@ model User {
     Submission Submission[] // Сдачи пользователя
 }
 
+// Роль
 model Role {
     role_id   Int    @id @default(autoincrement())
     role_name String @unique
@@ -32,6 +34,7 @@ model Role {
     Users User[]
 }
 
+// Курс
 model Course {
     course_id  Int    @id @default(autoincrement())
     teacher_id Int
@@ -42,6 +45,7 @@ model Course {
     Enrollments Course_Enrollment[]
 }
 
+// Запись на курс
 model Course_Enrollment {
     enrollment_id Int @id @default(autoincrement())
     course_id     Int
@@ -51,6 +55,7 @@ model Course_Enrollment {
     Student User   @relation(fields: [student_id], references: [user_id])
 }
 
+// Задание
 model Assignment {
     assignment_id Int    @id @default(autoincrement())
     course_id     Int
@@ -63,6 +68,7 @@ model Assignment {
     Submissions Submission[]
 }
 
+// Файлы заданий
 model Assignment_Files {
     file_id   Int    @id @default(autoincrement())
     file_name String
@@ -72,6 +78,7 @@ model Assignment_Files {
     Mappings Assignment_Files_Mappings[]
 }
 
+// Связь заданий и файлов
 model Assignment_Files_Mappings {
     mapping_id    Int @id @default(autoincrement())
     assignment_id Int
@@ -81,6 +88,7 @@ model Assignment_Files_Mappings {
     File       Assignment_Files @relation(fields: [file_id], references: [file_id])
 }
 
+// Сдача задания
 model Submission {
     submission_id   Int      @id @default(autoincrement())
     assignment_id   Int
@@ -93,6 +101,7 @@ model Submission {
     Files      Submission_Files_Mappings[]
 }
 
+// Файл сдачи задания
 model Submission_Files {
     file_id   Int    @id @default(autoincrement())
     file_name String
@@ -102,6 +111,7 @@ model Submission_Files {
     Mappings Submission_Files_Mappings[]
 }
 
+// Связь сдач и файлов
 model Submission_Files_Mappings {
     mapping_id    Int @id @default(autoincrement())
     submission_id Int
