@@ -3,13 +3,19 @@ import { prisma } from '../../../../../prisma/prisma-client';  // Убедите
 export async function GET(request: Request, { params }: { params: { taskId: string } }) {
   const taskId = parseInt(params.taskId, 10);
 
-  // Получаем задание по ID
   const task = await prisma.assignment.findUnique({
     where: { assignment_id: taskId },
     include: {
-      // Включаем связанные данные (например, файлы и подачу)
-      Files: true,
-      Submissions: true,
+      Files: {
+        include: {
+          File: true, // Включаем данные о файле
+        },
+      },
+      Course: {
+        include: {
+          Teacher: true, // Включаем преподавателя курса
+        },
+      },
     },
   });
 
@@ -17,5 +23,17 @@ export async function GET(request: Request, { params }: { params: { taskId: stri
     return new Response('Задание не найдено', { status: 404 });
   }
 
-  return new Response(JSON.stringify(task), { status: 200 });
+  // Преобразуем данные для возврата
+  const responseData = {
+    title: task.title,
+    description: task.description,
+    max_grade: task.max_grade,
+    Files: task.Files.map(mapping => ({
+      file_name: mapping.File.file_name,
+      file_path: mapping.File.file_path,
+    })),
+    Teacher: task.Course.Teacher, // Вытаскиваем преподавателя
+  };
+
+  return new Response(JSON.stringify(responseData), { status: 200 });
 }

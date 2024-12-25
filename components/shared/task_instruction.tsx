@@ -13,9 +13,10 @@ interface TaskInstructionProps {
   description: string;
   max_grade: number;
   files: File[];
+  teacherName: string; // Новое свойство для имени преподавателя
 }
 
-const Task_instruction: React.FC<TaskInstructionProps> = ({ title, description, max_grade, files }) => {
+const Task_instruction: React.FC<TaskInstructionProps> = ({ title, description, max_grade, files, teacherName }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
@@ -26,7 +27,7 @@ const Task_instruction: React.FC<TaskInstructionProps> = ({ title, description, 
         </a>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.name}>Фамилия Имя Отчество</div>
+        <div className={styles.teacher}>Преподаватель: {teacherName}</div> {/* Добавлено поле преподавателя */}
         <div className={styles.grade}>
           <div className={styles.count}>{max_grade}</div>
           баллов

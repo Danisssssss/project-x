@@ -14,6 +14,7 @@ interface Task {
   description: string;
   max_grade: number;
   Files: File[];
+  Teacher: { name: string }; // Добавляем поле для преподавателя
 }
 
 export default function TaskDetailsPage() {
@@ -25,7 +26,7 @@ export default function TaskDetailsPage() {
       fetch(`/api/tasks/${taskId}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data); // Добавьте это для проверки данных
+          // console.log(data); // Проверка данных
           setTaskData(data);
         });
     }
@@ -39,6 +40,7 @@ export default function TaskDetailsPage() {
       description={taskData.description}
       max_grade={taskData.max_grade}
       files={taskData.Files}
+      teacherName={taskData.Teacher.name} // Передаем имя преподавателя
     />
   );
 }
