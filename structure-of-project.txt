@@ -6,15 +6,21 @@
 |  |--page.tsx
 |  |--SidebarManager.tsx
 |  |--/api
-|  |--разные api и т.д.
-|  |--/course
+|  |  |--разные api и т.д.
+|  |--/course/[courseId]
 |  |  |--layout.tsx
 |  |  |--page.tsx
-|  |  |--и т.д.
+|  |  |--/tasks
+|  |  |  |--page.tsx
+|  |  |--/users
+|  |  |  |--page.tsx
 |  |--/settings
-|  |  |--разные файлы и т.д.
+|  |  |--page.tsx
 |  |--/task
-|  |  |--разные файлы и т.д.
+|  |  |--layout.tsx
+|  |  |--page.tsx
+|  |  |--/instruction
+|  |  |--/students_work
 /public
 |--/assets
 |  |--разные файлы и т.д.

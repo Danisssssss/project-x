@@ -154,3 +154,88 @@
     padding: 20px 40px;
     color: var(--color-bleu-de-france);
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+.modal_content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 470px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.title_item {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+    cursor: default;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal_field {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--color-bright-gray);
+    border-radius: 4px;
+    color: var(--color-black);
+    margin-bottom: 10px;
+    max-width: 430px;
+    max-height: 200px;
+}
+
+.modal_field:focus {
+    outline: none;
+}
+
+.files_area {
+    padding: 15px;
+    border: 1px solid var(--color-chinese-silver);
+    border-radius: 5px;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel_btn {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-white);
+    color: var(--color-dark-jungle);
+    border: 1px solid var(--color-cadet-grey);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save_btn {
+    padding: 15px 40px;
+    margin-left: 20px;
+    background-color: var(--color-dark-jungle);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
