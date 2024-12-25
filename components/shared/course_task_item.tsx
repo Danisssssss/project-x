@@ -25,78 +25,78 @@ interface AssignmentProps {
 const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
   const [isActive, setIsActive] = useState(false);
   const [userRole, setUserRole] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updatedAssignment, setUpdatedAssignment] = useState(assignment);
-  const [newFiles, setNewFiles] = useState<File[]>([]);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [updatedAssignment, setUpdatedAssignment] = useState(assignment);
+  // const [newFiles, setNewFiles] = useState<File[]>([]);
 
   const toggleActive = () => {
     setIsActive(!isActive);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const toggleModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setUpdatedAssignment((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   const { name, value } = e.target;
+  //   setUpdatedAssignment((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files).map((file) => ({
-        file_name: file.name,
-        file_path: URL.createObjectURL(file),  // Генерация временного URL для файла
-      }));
-      setNewFiles((prev) => [...prev, ...filesArray]);
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files) {
+  //     const filesArray = Array.from(e.target.files).map((file) => ({
+  //       file_name: file.name,
+  //       file_path: URL.createObjectURL(file),  // Генерация временного URL для файла
+  //     }));
+  //     setNewFiles((prev) => [...prev, ...filesArray]);
+  //   }
+  // };
 
-  const handleDeleteFile = (fileIndex: number, isNewFile: boolean) => {
-    if (isNewFile) {
-      setNewFiles((prev) => prev.filter((_, index) => index !== fileIndex));
-    } else {
-      setUpdatedAssignment((prev) => ({
-        ...prev,
-        files: prev.files.filter((_, index) => index !== fileIndex),
-      }));
-    }
-  };
+  // const handleDeleteFile = (fileIndex: number, isNewFile: boolean) => {
+  //   if (isNewFile) {
+  //     setNewFiles((prev) => prev.filter((_, index) => index !== fileIndex));
+  //   } else {
+  //     setUpdatedAssignment((prev) => ({
+  //       ...prev,
+  //       files: prev.files.filter((_, index) => index !== fileIndex),
+  //     }));
+  //   }
+  // };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
 
-    formData.append("title", updatedAssignment.title);
-    formData.append("description", updatedAssignment.description);
-    formData.append("max_grade", updatedAssignment.max_grade.toString());
+  //   formData.append("title", updatedAssignment.title);
+  //   formData.append("description", updatedAssignment.description);
+  //   formData.append("max_grade", updatedAssignment.max_grade.toString());
 
-    // Добавляем файлы в FormData
-    newFiles.forEach((file) => {
-      formData.append("new_files", file.file_path); // Передаем файл, а не его путь
-    });
+  //   // Добавляем файлы в FormData
+  //   newFiles.forEach((file) => {
+  //     formData.append("new_files", file.file_path); // Передаем файл, а не его путь
+  //   });
 
-    try {
-      const response = await fetch(`/api/course/${assignment.assignment_id}/update`, {
-        method: "POST",
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch(`/api/course/${assignment.assignment_id}/update`, {
+  //       method: "POST",
+  //       body: formData,
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        setUpdatedAssignment(data.assignment);
-        setNewFiles([]);
-        toggleModal();
-      } else {
-        console.error("Ошибка при обновлении задания");
-      }
-    } catch (error) {
-      console.error("Ошибка при отправке данных:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setUpdatedAssignment(data.assignment);
+  //       setNewFiles([]);
+  //       toggleModal();
+  //     } else {
+  //       console.error("Ошибка при обновлении задания");
+  //     }
+  //   } catch (error) {
+  //     console.error("Ошибка при отправке данных:", error);
+  //   }
+  // };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -121,20 +121,20 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
   }, []);
 
   return (
-    <div className={`${styles.item} ${isActive ? styles.active : ""}`}>
+    <div onClick={toggleActive} className={`${styles.item} ${isActive ? styles.active : ""}`}>
       <div className={styles.item_header}>
         <div className={styles.item_header_left}>
           <Image src="/assets/images/task.svg" alt="" width={34} height={34} />
-          <p className={styles.item_header_title} onClick={toggleActive}>
+          <p className={styles.item_header_title}>
             {assignment.title}
           </p>
         </div>
-        <div className={styles.item_header_right} onClick={toggleModal}>
+        {/* <div className={styles.item_header_right} onClick={toggleModal}>
           <Image src="/assets/images/more-black.svg" alt="" width={4} height={18} />
-        </div>
+        </div> */}
       </div>
 
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
             <h2 className={styles.title}>Изменить задание</h2>
@@ -202,7 +202,7 @@ const Course_task_item: React.FC<AssignmentProps> = ({ assignment }) => {
             </form>
           </div>
         </div>
-      )}
+      )} */}
 
       <div className={styles.item_main}>
         <div className={styles.item_main_left}>
