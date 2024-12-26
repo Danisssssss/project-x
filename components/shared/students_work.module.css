@@ -5,6 +5,7 @@
 
 .left {
     border-right: 1px solid var(--color-chinese-silver);
+    min-width: 500px;
 }
 
 .passed {

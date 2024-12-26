@@ -64,7 +64,7 @@ const Course_task: React.FC = () => {
         }
         const data = await response.json();
         setAssignments(data);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Не удалось загрузить задания.");
       }
@@ -97,7 +97,7 @@ const Course_task: React.FC = () => {
       setIsModalOpen(false);
       setNewAssignment({ title: "", description: "", max_grade: 0, files: [] });
       window.location.reload();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Не удалось добавить задание.");
     }
@@ -108,11 +108,11 @@ const Course_task: React.FC = () => {
       const validFiles = Array.from(e.target.files).filter((file) =>
         [
           // Изображения
-          "image/png", "image/jpeg", 
+          "image/png", "image/jpeg",
           // PDF
-          "application/pdf", 
+          "application/pdf",
           // Текстовые файлы
-          "text/plain", 
+          "text/plain",
           // Документы Word
           "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
           // Программные файлы
@@ -129,7 +129,7 @@ const Course_task: React.FC = () => {
           "application/json", // .json
           "text/x-sql", // .sql
         ].includes(file.type)
-      );      
+      );
 
       if (validFiles.length + newAssignment.files.length > 5) {
         alert("Вы можете загрузить не более 5 файлов.");
@@ -172,11 +172,11 @@ const Course_task: React.FC = () => {
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
-            <h2>Добавить задание</h2>
+            <h2 className={styles.modal_title}>Добавить задание</h2>
             <form onSubmit={handleAddAssignment}>
               <label>
                 Название:
-                <input
+                <input className={styles.modal_input}
                   type="text"
                   value={newAssignment.title}
                   onChange={(e) =>
@@ -186,7 +186,7 @@ const Course_task: React.FC = () => {
               </label>
               <label>
                 Описание:
-                <textarea
+                <textarea className={styles.modal_textarea}
                   value={newAssignment.description}
                   onChange={(e) =>
                     setNewAssignment({ ...newAssignment, description: e.target.value })
@@ -195,7 +195,7 @@ const Course_task: React.FC = () => {
               </label>
               <label>
                 Максимальная оценка:
-                <input
+                <input className={styles.modal_input}
                   type="number"
                   value={newAssignment.max_grade}
                   onChange={(e) =>
@@ -203,7 +203,7 @@ const Course_task: React.FC = () => {
                   }
                 />
               </label>
-              <label>
+              <label className={styles.modal_file}>
                 Файлы:
                 <input type="file" multiple onChange={handleFileChange} />
               </label>
@@ -217,10 +217,12 @@ const Course_task: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <button type="submit">Сохранить</button>
-              <button type="button" onClick={() => setIsModalOpen(false)}>
-                Закрыть
-              </button>
+              <div className={styles.modal_btns}>
+                <button className={styles.modal_close} type="button" onClick={() => setIsModalOpen(false)}>
+                  Закрыть
+                </button>
+                <button className={styles.modal_save} type="submit">Сохранить</button>
+              </div>
             </form>
           </div>
         </div>
