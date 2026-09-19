@@ -1,44 +1,22 @@
 {
-  "name": "project-x",
-  "version": "0.1.0",
+  "name": "premium-portfolio",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio",
-    "prisma:seed": "prisma db seed"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "skill:uiux": "npx ui-ux-pro-max-cli init --ai codex"
   },
   "dependencies": {
-    "@prisma/client": "^6.0.1",
-    "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1",
-    "bootstrap": "^5.3.3",
-    "formidable": "^3.5.2",
-    "jsonwebtoken": "^9.0.2",
-    "jwt-decode": "^4.0.0",
-    "multer": "^1.4.5-lts.1",
-    "next": "^14.2.21",
-    "prisma": "^6.0.1",
-    "react": "^18",
-    "react-bootstrap": "^2.10.5",
-    "react-dom": "^18",
-    "ts-node": "^10.9.2"
+    "framer-motion": "^13.4.0",
+    "lucide-react": "^1.47.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
-    "@types/formidable": "^3.4.5",
-    "@types/jsonwebtoken": "^9.0.7",
-    "@types/multer": "^1.4.12",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.13",
-    "typescript": "^5"
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.2.2"
   }
 }

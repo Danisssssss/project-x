@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="YD — портфолио Danis: дизайн, интерфейсы и визуальные решения." />
+  <link rel="canonical" href="https://danissssss.github.io/portfolio/" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="YD — Портфолио" />
+  <meta property="og:title" content="YD — Портфолио" />
+  <meta property="og:description" content="YD — портфолио Danis: дизайн, интерфейсы и визуальные решения." />
+  <meta property="og:url" content="https://danissssss.github.io/portfolio/" />
+  <meta property="og:image" content="https://danissssss.github.io/portfolio/assets/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="YD — Портфолио" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YD — Портфолио" />
+  <meta name="twitter:description" content="YD — портфолио Danis: дизайн, интерфейсы и визуальные решения." />
+  <meta name="twitter:image" content="https://danissssss.github.io/portfolio/assets/og-preview.png" />
+  <title>YD — Портфолио</title>
+  <link rel="icon" href="./assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <style>
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+    .reveal.visible{opacity:1;transform:none}
+    .hero-line>span{transform:translateY(115%);animation:heroReveal 1.05s cubic-bezier(.22,1,.36,1) forwards}
+    .hero-line:nth-child(2)>span{animation-delay:.08s}.hero-line:nth-child(3)>span{animation-delay:.16s}
+    @keyframes heroReveal{to{transform:none}}
+    .availability,.hero-bottom{opacity:0;transform:translateY(14px);animation:fadeUp .8s .45s cubic-bezier(.22,1,.36,1) forwards}
+    .hero-bottom{animation-delay:.62s}@keyframes fadeUp{to{opacity:1;transform:none}}
+    .project-card{transition:transform .35s cubic-bezier(.22,1,.36,1)}.project-card:hover{transform:translateY(-6px)}
+    .visual-scale{transition:transform .65s cubic-bezier(.22,1,.36,1)}.project-card:hover .visual-scale{transform:scale(1.025)}
+    @media (prefers-reduced-motion:reduce){.reveal,.availability,.hero-bottom,.hero-line>span{opacity:1!important;transform:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="progress"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <header class="site-header" id="header">
+    <a class="brand" href="#top" aria-label="Главная"><img class="brand-logo" src="./assets/brand-logo-cursor.png" alt="YD"></a>
+  </header>
+
+
+  <nav class="mobile-limelight-nav" id="mobileLimelight" style="--active-shift:0%" aria-label="Основная навигация">
+    <span class="limelight-indicator" aria-hidden="true"></span>
+    <a class="is-active" data-nav-id="home" href="#top" aria-label="Главная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9A1.5 1.5 0 0 1 19.5 21h-15A1.5 1.5 0 0 1 3 19.5z"/><path d="M9 21v-7h6v7"/></svg><span>Главная</span></a>
+    <a data-nav-id="works" href="./works.html" aria-label="Работы"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Работы</span></a>
+    <a data-nav-id="contact" href="#contact" aria-label="Контакты"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Контакты</span></a>
+  </nav>
+
+  <main>
+    <section id="top" class="hero section-shell">
+      <div class="hero-shader-shell" id="heroShaderShell" aria-hidden="true">
+        <div class="webgl-shader-stage">
+          <div class="webgl-shader-fallback"></div>
+          <canvas class="webgl-shader-canvas"></canvas>
+        </div>
+      </div>
+      <div class="hero-content" id="heroContent">
+        <div class="hero-heading">
+          <div class="hero-line"><span>Я СОЗДАЮ</span></div>
+          <div class="hero-line accent-line"><span>ЦИФРОВЫЕ ПРОДУКТЫ</span></div>
+          <div class="hero-line"><span>С ХАРАКТЕРОМ</span></div>
+        </div>
+        <div class="hero-bottom">
+          <p>Я проектирую и создаю выразительные цифровые продукты, где бренд, анимация и технологии работают как единая система.</p>
+          <a class="scroll-link" href="#work"><span>Избранные проекты</span><span class="scroll-icon">↘</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work section-shell section-gap">
+      <div class="section-head reveal"><div class="eyebrow">✦ Избранные проекты</div><div class="section-head-actions"><div class="section-number">01 — 06</div><a class="all-work-link" href="./works.html">Все 40 работ <span>↗</span></a></div></div>
+      <div class="project-grid">
+        <div class="project-wrap square reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=1" aria-label="Открыть работу «Автоматизация телефона»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-01.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-01.webp" alt="Автоматизация телефона" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">01</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>Автоматизация телефона</h3><p>Серия digital-карточек о возможностях смартфона с чистой структурой, UI-фрагментами и выразительными акцентами.</p></div><div class="project-side"><span>Цифровой дизайн / Инфографика</span><span>2026</span></div></div>
+          <div class="tag-row"><span>Digital</span><span>Инфографика</span><span>UI</span></div>
+        </article></div>
+
+        <div class="project-wrap wide reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=14" aria-label="Открыть работу «Diesel — рекламный баннер»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-14.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-14.webp" alt="Diesel — рекламный баннер" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">02</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>Diesel — рекламный баннер</h3><p>Контрастный рекламный макет с сильным предметным образом, крупной типографикой и чёткой иерархией.</p></div><div class="project-side"><span>Брендинг / Реклама</span><span>2026</span></div></div>
+          <div class="tag-row"><span>Брендинг</span><span>Реклама</span><span>Баннер</span></div>
+        </article></div>
+
+        <div class="project-wrap square reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=30" aria-label="Открыть работу «Социальная сеть»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-30.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-30.webp" alt="Социальная сеть" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">03</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>Социальная сеть</h3><p>Карточка к фильму с насыщенной визуальной системой, крупной типографикой и цифровыми мотивами.</p></div><div class="project-side"><span>Цифровой дизайн / Постер</span><span>2026</span></div></div>
+          <div class="tag-row"><span>Digital</span><span>Постер</span><span>Типографика</span></div>
+        </article></div>
+
+        <div class="project-wrap portrait reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=5" aria-label="Открыть работу «Green Parad — рекламный макет»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-05.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-05.webp" alt="Green Parad — рекламный макет" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">04</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>Green Parad — рекламный макет</h3><p>Вертикальная рекламная композиция с акцентом на продукт, контраст и быстрое считывание ключевого предложения.</p></div><div class="project-side"><span>Цифровой дизайн / Реклама</span><span>2026</span></div></div>
+          <div class="tag-row"><span>Digital</span><span>Реклама</span><span>Композиция</span></div>
+        </article></div>
+
+        <div class="project-wrap square reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=8" aria-label="Открыть работу «ITTK Skill Week — афиша»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-08.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-08.webp" alt="ITTK Skill Week — афиша" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">05</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>ITTK Skill Week — афиша</h3><p>Яркая визуальная коммуникация образовательной недели с динамичной типографикой и системой анонсов.</p></div><div class="project-side"><span>Цифровой дизайн / Айдентика</span><span>2025</span></div></div>
+          <div class="tag-row"><span>Айдентика</span><span>Афиша</span><span>Типографика</span></div>
+        </article></div>
+
+        <div class="project-wrap portrait reveal"><article class="project-card">
+          <a class="project-visual-wrap project-visual-link" href="./works.html?work=40" aria-label="Открыть работу «Yamaguchi — подарочный сертификат»"><div class="visual-scale"><div class="visual visual-real-work"><img class="real-work-backdrop" src="./assets/works/work-40.webp" alt="" aria-hidden="true"><img class="real-work-image" src="./assets/works/work-40.webp" alt="Yamaguchi — подарочный сертификат" loading="lazy"><div class="real-work-vignette"></div></div></div><div class="project-index">06</div><span class="project-arrow">↗</span></a>
+          <div class="project-meta"><div><h3>Yamaguchi — подарочный сертификат</h3><p>Вертикальный рекламный макет подарочного сертификата с продуктовой подачей и премиальной композицией.</p></div><div class="project-side"><span>Полиграфия / Реклама</span><span>2021</span></div></div>
+          <div class="tag-row"><span>Полиграфия</span><span>Реклама</span><span>Промо</span></div>
+        </article></div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <div class="marquee-group"><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span></div>
+      <div class="marquee-group"><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span><span>ДИЗАЙН <i>✦</i></span><span>ПРОТОТИПИРОВАНИЕ <i>✦</i></span><span>ADOBE PHOTOSHOP <i>✦</i></span><span>ADOBE ILLUSTRATOR <i>✦</i></span><span>FIGMA <i>✦</i></span></div>
+    </div></div>
+
+    <section id="about" class="about section-shell section-gap">
+      <div class="about-intro reveal"><div class="eyebrow">✦ Что я делаю</div><h2 id="aboutHeadline" class="scroll-headline"><span class="headline-line headline-line-1">Внимание к деталям.</span><br><span class="headline-line headline-line-2">Сильные системы.</span></h2><p>Я соединяю бренд, продукт и код, чтобы создавать понятные, выразительные и запоминающиеся цифровые решения без ущерба удобству.</p></div>
+      <div class="capabilities-grid">
+        <div class="reveal"><div class="spotlight-card capability-card"><span class="cap-number">01</span><div><h3>Цифровое направление</h3><p>Позиционирование, визуальные системы и продуктовые истории с ясной идеей и характером.</p></div><span class="cap-arrow">↗</span></div></div>
+        <div class="reveal"><div class="spotlight-card capability-card"><span class="cap-number">02</span><div><h3>UI / UX дизайн</h3><p>Интерфейсы, в которых каждое состояние продумано: от первого впечатления до крайних сценариев.</p></div><span class="cap-arrow">↗</span></div></div>
+        <div class="reveal"><div class="spotlight-card capability-card"><span class="cap-number">03</span><div><h3>Системы анимации</h3><p>Переходы и микроанимации, которые усиливают иерархию и помогают восприятию, а не создают шум.</p></div><span class="cap-arrow">↗</span></div></div>
+        <div class="reveal"><div class="spotlight-card capability-card"><span class="cap-number">04</span><div><h3>Креативная разработка</h3><p>Готовые к запуску React-интерфейсы с вниманием к скорости, адаптивности и доступности.</p></div><span class="cap-arrow">↗</span></div></div>
+      </div>
+      <div class="principles reveal"><div class="principles-copy"><span class="eyebrow">✦ Принципы</span><p>Смысл важнее декора.<br>Анимация должна помогать.<br>Сначала ясность, потом эффектность.</p></div><div class="principles-orbit"><div class="orbit-track"><span class="orbit-dot"></span></div><div class="orbit-core">UX</div></div></div>
+    </section>
+
+    <section id="contact" class="contact section-shell"><div class="reveal"><div class="contact-panel">
+      <div class="contact-kicker"><span class="status-dot"></span>Открыт для интересных коллабораций</div><h2>Есть идея,<br>которую стоит реализовать?</h2><p>Расскажите, на каком этапе вы сейчас, куда должен прийти продукт и каким должен быть успешный результат.</p>
+      <p class="contact-mail-prompt">Напишите мне на почту — обсудим задачу, сроки и формат работы.</p>
+      <div class="contact-foot"><a href="mailto:danis.004@mail.ru">✉ danis.004@mail.ru</a><span>Работаю по всему миру</span></div>
+    </div></div></section>
+  </main>
+  <footer class="footer section-shell"><span>© 2026 YD</span><span>Продуманный дизайн.</span><a href="#top">Наверх ↑</a></footer>
+
+  <script src="./webgl-shader.js"></script>
+  <script>
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cursorGlow=document.getElementById('cursorGlow');
+    if(cursorGlow && !matchMedia('(pointer: coarse)').matches && !reduced){
+      let glowRaf=0, glowX=-200, glowY=-200;
+      addEventListener('pointermove',e=>{glowX=e.clientX;glowY=e.clientY;if(!glowRaf)glowRaf=requestAnimationFrame(()=>{cursorGlow.style.left=`${glowX}px`;cursorGlow.style.top=`${glowY}px`;cursorGlow.classList.add('is-visible');glowRaf=0;});},{passive:true});
+      document.documentElement.addEventListener('mouseleave',()=>cursorGlow.classList.remove('is-visible'));
+    }
+    const progress = document.getElementById('progress');
+    const heroShaderShell = document.getElementById('heroShaderShell');
+    const heroContent = document.getElementById('heroContent');
+    function onScroll(){
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const p = max > 0 ? scrollY / max : 0;
+      progress.style.transform = `scaleX(${p})`;
+      if(!reduced){ const y=Math.min(scrollY,innerHeight); heroContent.style.transform=`translateY(${y*.10}px)`; heroShaderShell.style.transform=`translateY(${-y*.14}px)`; }
+    }
+    addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }}), {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.spotlight-card').forEach(card => card.addEventListener('pointermove', e => { const r=card.getBoundingClientRect(); card.style.setProperty('--x',`${e.clientX-r.left}px`); card.style.setProperty('--y',`${e.clientY-r.top}px`); }));
+
+    const mobileLimelight=document.getElementById('mobileLimelight');
+    const mobileNavItems=[...document.querySelectorAll('#mobileLimelight [data-nav-id]')];
+    function updateMobileNav(){
+      if(!mobileLimelight) return;
+      const threshold=innerHeight*.56;
+      const points=[['contact','contact'],['work','works']];
+      const current=points.find(([id])=>{const node=document.getElementById(id);return node&&node.getBoundingClientRect().top<=threshold;});
+      const active=current?current[1]:'home';
+      const index=Math.max(0,mobileNavItems.findIndex(item=>item.dataset.navId===active));
+      mobileLimelight.style.setProperty('--active-shift',`${index*100}%`);
+      mobileNavItems.forEach(item=>item.classList.toggle('is-active',item.dataset.navId===active));
+    }
+    addEventListener('scroll',updateMobileNav,{passive:true}); addEventListener('resize',updateMobileNav,{passive:true}); updateMobileNav();
+
+    const aboutHeadline=document.getElementById('aboutHeadline');
+    const headlineOne=aboutHeadline?.querySelector('.headline-line-1');
+    const headlineTwo=aboutHeadline?.querySelector('.headline-line-2');
+    const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+    const smooth=(a,b,v)=>{ const t=clamp((v-a)/(b-a)); return t*t*(3-2*t); };
+    const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+    const muted=[121,118,111], bright=[244,240,232], mid=[154,150,143];
+    function updateHeadline(){
+      if(!aboutHeadline||reduced) return;
+      const r=aboutHeadline.getBoundingClientRect();
+      const start=innerHeight*.90, end=innerHeight*.34;
+      const p=clamp((start-r.top)/(start-end));
+      const firstIn=smooth(.04,.28,p), firstOut=smooth(.62,.92,p);
+      const firstBase=mix(muted,bright,firstIn);
+      const first=mix(firstBase,mid,firstOut*.72);
+      const second=mix(muted,bright,smooth(.43,.72,p));
+      headlineOne.style.color=`rgb(${first.join(',')})`;
+      headlineTwo.style.color=`rgb(${second.join(',')})`;
+    }
+    addEventListener('scroll',updateHeadline,{passive:true}); addEventListener('resize',updateHeadline,{passive:true}); updateHeadline();
+  </script>
+</body>
+</html>

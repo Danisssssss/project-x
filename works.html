@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Архив дизайнерских работ: digital, брендинг, полиграфия и оформление среды." />
+  <link rel="canonical" href="https://danissssss.github.io/portfolio/works.html" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="YD — Портфолио" />
+  <meta property="og:title" content="Работы — YD" />
+  <meta property="og:description" content="Архив дизайнерских работ: digital, брендинг, полиграфия и оформление среды." />
+  <meta property="og:url" content="https://danissssss.github.io/portfolio/works.html" />
+  <meta property="og:image" content="https://danissssss.github.io/portfolio/assets/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="YD — Портфолио" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Работы — YD" />
+  <meta name="twitter:description" content="Архив дизайнерских работ: digital, брендинг, полиграфия и оформление среды." />
+  <meta name="twitter:image" content="https://danissssss.github.io/portfolio/assets/og-preview.png" />
+  <title>Работы — YD</title>
+  <link rel="icon" href="./assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./works.css" />
+</head>
+<body class="works-page">
+  <div class="scroll-progress" id="worksProgress"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <header class="works-header" id="worksHeader">
+    <a class="brand" href="./index.html" aria-label="На главную"><img class="brand-logo" src="./assets/brand-logo-cursor.png" alt="YD"></a>
+  </header>
+
+
+  <nav class="mobile-limelight-nav works-mobile-limelight" style="--active-shift:100%" aria-label="Основная навигация">
+    <span class="limelight-indicator" aria-hidden="true"></span>
+    <a href="./index.html" aria-label="Главная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9A1.5 1.5 0 0 1 19.5 21h-15A1.5 1.5 0 0 1 3 19.5z"/><path d="M9 21v-7h6v7"/></svg><span>Главная</span></a>
+    <a class="is-active" href="#gallery" aria-label="Работы"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Работы</span></a>
+    <a href="./index.html#contact" aria-label="Контакты"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Контакты</span></a>
+  </nav>
+
+  <main>
+    <section class="works-hero section-shell">
+      <div class="works-hero-top reveal-work">
+        <div class="eyebrow">✦ Архив портфолио</div>
+        <div class="works-count"><span id="workCount">40</span> работ</div>
+      </div>
+      <h1 class="reveal-work">МОИ<br><span>РАБОТЫ</span></h1>
+      <div class="works-hero-bottom reveal-work">
+        <p>Подборка проектов разных лет: digital-дизайн, визуальные коммуникации, айдентика, полиграфия и оформление пространства.</p>
+        <span class="works-hint">Листайте ↓</span>
+      </div>
+    </section>
+
+    <section id="gallery" class="works-gallery-section section-shell">
+      <div class="filter-bar reveal-work" role="toolbar" aria-label="Фильтр работ">
+        <button class="filter-chip active" data-filter="Все" type="button">Все <span>40</span></button>
+        <button class="filter-chip" data-filter="Цифровой дизайн" type="button">Цифровой дизайн <span>17</span></button>
+        <button class="filter-chip" data-filter="Брендинг" type="button">Брендинг <span>7</span></button>
+        <button class="filter-chip" data-filter="Полиграфия" type="button">Полиграфия <span>6</span></button>
+        <button class="filter-chip" data-filter="Среда" type="button">Среда <span>10</span></button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="works-footer section-shell">
+    <div><img class="footer-logo" src="./assets/brand-logo-cursor.png" alt="YD"> ПОРТФОЛИО</div>
+    <span>40 работ · 2021—2026</span>
+    <a href="#gallery">К началу работ ↑</a>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Просмотр работы">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Закрыть">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Предыдущая работа">←</button>
+    <div class="lightbox-stage">
+      <img id="lightboxImage" alt="" />
+      <div class="lightbox-meta">
+        <div>
+          <span id="lightboxCategory"></span>
+          <h2 id="lightboxTitle"></h2>
+        </div>
+        <span id="lightboxYear"></span>
+      </div>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Следующая работа">→</button>
+  </div>
+
+  <script src="./assets/works/works-data.js"></script>
+  <script src="./works.js"></script>
+</body>
+</html>
